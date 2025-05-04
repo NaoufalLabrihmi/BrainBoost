@@ -52,7 +52,6 @@ You can find these in your [Supabase project settings](https://app.supabase.com/
 
 ### 4. **Set Up Supabase Database**
 - Create a new project on [Supabase](https://app.supabase.com/).
-- Run the SQL migration in `supabase/migrations/20240320000000_add_quiz_session_tables.sql` using the SQL editor or CLI to set up tables and policies.
 - (Optional) Add seed data for quizzes, products, etc.
 
 ### 5. **Start the App**
@@ -94,7 +93,7 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 │   ├── integrations/  # Supabase client setup
 │   └── ...
 ├── supabase/
-│   └── migrations/    # SQL migrations for database setup
+│   └──               # Supabase backend setup
 ├── public/            # Static assets
 ├── package.json       # Project metadata and scripts
 └── ...
@@ -155,7 +154,7 @@ MIT — Free to use, modify, and share.
 
 ## ✨ Credits
 
-Made with ❤️ by the Brain Boost team.
+Made with ❤️ by Naoufal Labrihmi.
 
 ---
 
