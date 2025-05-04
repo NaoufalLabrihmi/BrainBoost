@@ -131,10 +131,21 @@ const ProductTable = () => {
   };
   const handleDelete = async (product) => {
     setLoading(true);
-    const { error } = await supabase.from('products').delete().eq('id', product.id);
+    setError("");
+    setSuccess("");
+    // First, delete all purchases for this product
+    const { error: purchasesError } = await supabase.from('purchases').delete().eq('product_id', product.id);
+    if (purchasesError) {
+      setLoading(false);
+      setError('Failed to delete related purchases. Product not deleted.');
+      return;
+    }
+    // Now, delete the product
+    const { error: productError } = await supabase.from('products').delete().eq('id', product.id);
     setLoading(false);
-    if (error) setError('Failed to delete product');
-    else {
+    if (productError) {
+      setError(productError.message || 'Failed to delete product');
+    } else {
       setSuccess('Product deleted!');
       setRefresh((r) => r + 1);
     }

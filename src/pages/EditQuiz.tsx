@@ -290,8 +290,8 @@ const EditQuiz = () => {
           {/* Responsive two-column layout for Quiz Details and Add/Edit Question */}
           <div className="flex flex-col md:flex-row gap-8 mb-10">
             {/* Quiz Details Card */}
-            <div className="flex-1 md:basis-2/5 bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl rounded-3xl p-8 border border-cyan-700/30">
-              <h2 className="text-2xl font-extrabold mb-4 text-cyan-300 drop-shadow-cyan">Quiz Details</h2>
+            <div className="flex-1 md:basis-2/5 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-cyan-700/30">
+              <h2 className="text-2xl font-extrabold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text">Quiz Details</h2>
               <div className="grid grid-cols-1 gap-6">
               <div>
                 <Label htmlFor="title">Quiz Title*</Label>
@@ -337,12 +337,12 @@ const EditQuiz = () => {
             </div>
           </div>
             {/* Add/Edit Question Card */}
-            <div ref={addEditRef} className="flex-1 md:basis-3/5 bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl rounded-3xl p-8 border border-cyan-700/30">
-              <h3 className="text-xl font-bold mb-3 text-cyan-200">{editingQuestionIndex !== null ? 'Edit Question' : 'Add New Question'}</h3>
+            <div ref={addEditRef} className="flex-1 md:basis-3/5 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-cyan-700/30">
+              <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text">{editingQuestionIndex !== null ? 'Edit Question' : 'Add New Question'}</h3>
               <Tabs value={currentQuestion.type} onValueChange={(v) => handleQuestionTypeChange(v as QuestionType)}>
-                <TabsList className="mb-4 bg-gray-800 border border-cyan-700/40 rounded-lg">
+                <TabsList className="mb-4 bg-gray-800 border border-cyan-700/40 rounded-lg flex justify-between w-full min-w-0">
                   {QUESTION_TYPES.map((qt) => (
-                    <TabsTrigger key={qt.value} value={qt.value} className="text-cyan-200 data-[state=active]:bg-cyan-700 data-[state=active]:text-white">
+                    <TabsTrigger key={qt.value} value={qt.value} className="flex-1 min-w-0 text-cyan-200 data-[state=active]:bg-cyan-700 data-[state=active]:text-white transition-all px-2 py-1 text-sm sm:text-base font-semibold rounded-lg">
                       {qt.label}
                     </TabsTrigger>
                   ))}
@@ -354,7 +354,7 @@ const EditQuiz = () => {
                     value={currentQuestion.text}
                     onChange={(e) => setCurrentQuestion({ ...currentQuestion, text: e.target.value })}
                     placeholder="Enter your question here"
-                    className="mt-1 resize-none bg-gray-900 border-cyan-700/40 text-white focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                    className="mt-1 resize-none bg-gray-900 border-cyan-700/40 text-white focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 rounded-lg"
                     rows={2}
                   />
                 </div>
@@ -381,7 +381,7 @@ const EditQuiz = () => {
                           value={option}
                           onChange={(e) => handleOptionChange(index, e.target.value)}
                           placeholder={`Option ${index + 1}`}
-                          className="flex-1 bg-gray-900 border-cyan-700/40 text-white focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                          className="flex-1 bg-gray-900 border-cyan-700/40 text-white focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 rounded-lg"
                         />
                       </div>
                     ))}
@@ -417,7 +417,7 @@ const EditQuiz = () => {
                       value={currentQuestion.answer as string || ''}
                       onChange={(e) => setCurrentQuestion({ ...currentQuestion, answer: e.target.value })}
                       placeholder="Enter the correct answer"
-                      className="mt-1 bg-gray-900 border-cyan-700/40 text-white focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+                      className="mt-1 bg-gray-900 border-cyan-700/40 text-white focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 rounded-lg"
                     />
                     <p className="text-xs text-cyan-400 mt-1">
                       Student answers will be marked correct if they match exactly (case insensitive)
@@ -477,7 +477,7 @@ const EditQuiz = () => {
                 <div className="mt-6 flex gap-3">
                   <Button
                     onClick={handleAddOrEditQuestion}
-                    className="w-full md:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold shadow-lg hover:from-blue-500 hover:to-cyan-500 focus:ring-2 focus:ring-cyan-400"
+                    className="w-full md:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold hover:from-blue-500 hover:to-cyan-500 focus:ring-2 focus:ring-cyan-400 rounded-lg"
                   >
                     {editingQuestionIndex !== null ? 'Update Question' : 'Add This Question'}
                   </Button>
@@ -485,7 +485,7 @@ const EditQuiz = () => {
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full md:w-auto border-cyan-700 text-cyan-300 hover:bg-gray-800 focus:ring-2 focus:ring-cyan-400"
+                      className="w-full md:w-auto border-cyan-700 text-cyan-300 hover:bg-gray-800 focus:ring-2 focus:ring-cyan-400 rounded-lg"
                       onClick={() => {
                         setCurrentQuestion(defaultQuestion());
                         setEditingQuestionIndex(null);
@@ -500,8 +500,8 @@ const EditQuiz = () => {
           </div>
 
           {/* Quiz Questions List Section */}
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl rounded-3xl p-8 mb-10 border border-cyan-700/30">
-            <h2 className="text-2xl font-extrabold mb-4 text-cyan-300 drop-shadow-cyan">Quiz Questions</h2>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 mb-10 border border-cyan-700/30">
+            <h2 className="text-2xl font-extrabold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text">Quiz Questions</h2>
             {questions.length > 0 && (
               <div className="mb-10">
                 <h3 className="text-lg font-bold mb-3 text-cyan-200">Added Questions ({questions.length})</h3>

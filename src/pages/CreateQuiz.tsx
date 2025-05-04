@@ -301,17 +301,17 @@ const CreateQuiz = () => {
                   <h1 className="text-5xl font-extrabold mb-2 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-lg animate-fade-in">Create a New Quiz</h1>
                   <p className="text-lg text-cyan-200 mb-6 animate-fade-in">Design your interactive quiz with questions and launch it for your class!</p>
                   <Button
-                    onClick={() => navigate('/dashboard')}
+                    onClick={() => navigate('/quizzes')}
                     className="mt-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:from-blue-500 hover:to-cyan-500 text-lg animate-pulse focus:ring-2 focus:ring-cyan-400/40"
                   >
-                    Back to Dashboard
+                    Back to Quizzes
                   </Button>
                 </div>
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-8 mb-10">
-              <div className="flex-1 md:basis-2/5 bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl rounded-3xl p-8 border border-cyan-800/60">
-                <h2 className="text-2xl font-extrabold mb-4 text-cyan-300 drop-shadow-cyan">Quiz Details</h2>
+              <div className="flex-1 md:basis-2/5 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-cyan-800/60">
+                <h2 className="text-2xl font-extrabold mb-4 text-cyan-300">Quiz Details</h2>
                 <div className="grid grid-cols-1 gap-6">
               <div>
                 <Label htmlFor="title">Quiz Title*</Label>
@@ -366,12 +366,18 @@ const CreateQuiz = () => {
               </div>
                 </div>
               </div>
-              <div className="flex-1 md:basis-3/5 bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl rounded-3xl p-8 border border-cyan-800/60">
+              <div className="flex-1 md:basis-3/5 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-cyan-800/60">
                 <h3 className="text-xl font-bold mb-3 text-cyan-200">{editingIndex !== null ? 'Edit Question' : 'Add New Question'}</h3>
               <Tabs value={currentQuestion.type} onValueChange={(v) => handleQuestionTypeChange(v as QuestionType)}>
-                  <TabsList className="mb-4 bg-gray-800 border border-cyan-800/40 rounded-lg">
+                <TabsList
+                  className="mb-4 bg-gray-800 border border-cyan-800/40 rounded-lg flex justify-between w-full min-w-0"
+                >
                   {QUESTION_TYPES.map((qt) => (
-                      <TabsTrigger key={qt.value} value={qt.value} className="text-cyan-200 data-[state=active]:bg-cyan-700 data-[state=active]:text-white">
+                    <TabsTrigger
+                      key={qt.value}
+                      value={qt.value}
+                      className="flex-1 min-w-0 text-cyan-200 data-[state=active]:bg-cyan-700 data-[state=active]:text-white transition-all px-2 py-1 text-sm sm:text-base font-semibold rounded-lg"
+                    >
                       {qt.label}
                     </TabsTrigger>
                   ))}
@@ -527,8 +533,8 @@ const CreateQuiz = () => {
               </Tabs>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl rounded-3xl p-8 mb-10 border border-cyan-800/60">
-              <h2 className="text-2xl font-extrabold mb-4 text-cyan-300 drop-shadow-cyan">Quiz Questions</h2>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 mb-10 border border-cyan-800/60">
+              <h2 className="text-2xl font-extrabold mb-4 text-cyan-300">Quiz Questions</h2>
               {questions.length > 0 && (
                 <div className="mb-10">
                   <h3 className="text-lg font-bold mb-3 text-cyan-200">Added Questions ({questions.length})</h3>

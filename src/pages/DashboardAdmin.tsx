@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Package, BarChart2, Layers, GraduationCap, BookOpen, User2, Edit2, Trash2, ChevronDown, Loader2, Coins, ListChecks, Menu, X } from 'lucide-react';
+import { Users, Package, BarChart2, Layers, GraduationCap, BookOpen, User2, Edit2, Trash2, ChevronDown, Loader2, Coins, ListChecks, Menu, X, PanelRightOpen } from 'lucide-react';
 import { Line, Bar, Doughnut, Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -26,6 +26,8 @@ import { toast } from 'react-hot-toast';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useNavigate } from 'react-router-dom';
 import PurchaseTable from '@/components/admin/PurchaseTable';
+import ForumCategoryTable from '@/components/admin/ForumCategoryTable';
+import AdminSidebar from '@/components/admin/AdminSidebar';
 
 ChartJS.register(
   CategoryScale,
@@ -403,110 +405,23 @@ const DashboardAdmin = () => {
     <div className="flex min-h-screen relative bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white overflow-x-hidden">
       {/* Soft gradient overlay for extra depth */}
       <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-br from-purple-900/30 via-transparent to-blue-900/20" />
-      {/* Floating sidebar toggle button */}
+      {/* Floating sidebar toggle button (mobile only) */}
       <button
-        className="fixed top-4 left-4 z-50 p-2 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 shadow-lg hover:scale-105 transition-transform md:hidden"
+        className="fixed top-4 right-4 z-50 p-2 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 shadow-lg hover:scale-105 transition-transform md:hidden"
         onClick={() => setSidebarOpen(true)}
         aria-label="Open admin sidebar"
       >
-        <Menu className="w-7 h-7 text-white" />
+        <PanelRightOpen className="w-7 h-7 text-white" />
       </button>
-      {/* Sidebar Drawer */}
-      <div className={`fixed inset-0 z-40 transition-all duration-300 ${sidebarOpen ? 'visible' : 'invisible pointer-events-none'}`}
-        style={{ background: sidebarOpen ? 'rgba(20,20,40,0.45)' : 'transparent' }}
-        onClick={() => setSidebarOpen(false)}
-      >
-        <aside
-          className={`absolute top-0 left-0 h-full w-64 bg-gradient-to-br from-gray-950/90 via-gray-900/90 to-blue-950/90 border-r border-purple-700/40 shadow-2xl backdrop-blur-xl flex flex-col py-6 px-2 gap-2 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
-          onClick={e => e.stopPropagation()}
-        >
-          <div className="flex items-center justify-between mb-8 px-2">
-            <span className="inline-flex items-center gap-2">
-              <span className="p-2 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600">
-                <BarChart2 className="h-5 w-5 text-white" />
-              </span>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Admin
-              </span>
-            </span>
-            <button
-              className="p-2 rounded-full hover:bg-gray-800/60 transition"
-              onClick={() => setSidebarOpen(false)}
-              aria-label="Close sidebar"
-            >
-              <X className="w-6 h-6 text-gray-300" />
-            </button>
-          </div>
-          <nav className="flex flex-col gap-1 flex-1">
-            {navItems.map((item) => (
-              <button
-                key={item.key}
-                className={`flex items-center px-3 py-2 rounded-lg text-base font-medium transition-all duration-150 hover:bg-purple-800/40 focus:outline-none border border-transparent w-full text-left ${
-                  active === item.key ? 'bg-purple-800/70 border-purple-500 shadow' : 'bg-transparent'
-                }`}
-                onClick={() => { setActive(item.key); setSidebarOpen(false); }}
-              >
-                {item.icon}
-                {item.label}
-              </button>
-            ))}
-          </nav>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-3 py-2 mt-auto mb-4 rounded-lg text-base font-medium transition-all duration-150 hover:bg-red-900/40 focus:outline-none border border-transparent text-red-300 hover:text-red-200 hover:border-red-800/50 group"
-          >
-            <svg
-              className="w-4 h-4 mr-2 transition-transform duration-200 group-hover:-translate-x-0.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            Logout
-          </button>
-        </aside>
-      </div>
-      {/* Desktop sidebar (hidden on mobile) */}
-      <aside className={`hidden md:flex w-52 flex-col py-6 px-2 gap-2 ${glass} sticky top-0 h-screen z-30 border-r border-gray-800/80`}> 
-        <div className="mb-6 flex items-center gap-2 px-2">
-          <span className="inline-block p-1.5 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600">
-            <BarChart2 className="h-5 w-5 text-white" />
-          </span>
-          <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Admin
-          </span>
-        </div>
-        <nav className="flex flex-col gap-1 flex-1">
-          {navItems.map((item) => (
-            <button
-              key={item.key}
-              className={`flex items-center px-3 py-2 rounded-lg text-base font-medium transition-all duration-150 hover:bg-purple-800/40 focus:outline-none border border-transparent w-full text-left ${
-                active === item.key ? 'bg-purple-800/70 border-purple-500 shadow' : 'bg-transparent'
-              }`}
-              onClick={() => setActive(item.key)}
-            >
-              {item.icon}
-              {item.label}
-            </button>
-          ))}
-        </nav>
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 px-3 py-2 mt-auto mb-4 rounded-lg text-base font-medium transition-all duration-150 hover:bg-red-900/40 focus:outline-none border border-transparent text-red-300 hover:text-red-200 hover:border-red-800/50 group"
-        >
-          <svg
-            className="w-4 h-4 mr-2 transition-transform duration-200 group-hover:-translate-x-0.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
-          Logout
-        </button>
-      </aside>
-
+      {/* Sidebar (mobile + desktop) */}
+      <AdminSidebar
+        active={active}
+        setActive={setActive}
+        navItems={navItems}
+        onLogout={handleLogout}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
       {/* Main content */}
       <main className="flex-1 flex flex-col py-8 px-2 md:px-8 max-w-full">
         {active === 'stats' && (
@@ -880,12 +795,7 @@ const DashboardAdmin = () => {
         )}
         {active === 'categories' && (
           <section>
-            <h1 className="text-2xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
-              Manage Forum Categories
-            </h1>
-            <div className={`${glass} p-5`}>
-              <p className="text-gray-400 text-sm">(Forum category management table goes here.)</p>
-            </div>
+            <ForumCategoryTable />
           </section>
         )}
         {active === 'purchases' && (
