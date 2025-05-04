@@ -148,7 +148,7 @@ All contributions are welcome! Please follow the existing code style and add tes
 
 ## 📄 License
 
-MIT — Free to use, modify, and share.
+All rights reserved. No one is allowed to update, modify, or work on this project without the explicit permission of Naoufal Labrihmi.
 
 ---
 
