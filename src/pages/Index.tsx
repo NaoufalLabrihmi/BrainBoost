@@ -282,7 +282,7 @@ const Index = () => {
             <Navigation />
             <main className="flex-grow">
               {/* Hero Section - visually stunning dark mode with animated icon and dynamic background */}
-              <section className="relative py-24 md:py-36 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
+              <section className="relative py-14 md:py-24 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
                 {/* Animated background: gradient blobs and floating shapes for competition energy */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                   {/* Animated gradient blobs */}
