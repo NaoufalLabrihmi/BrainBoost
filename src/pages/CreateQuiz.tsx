@@ -221,7 +221,7 @@ const CreateQuiz = () => {
       setEditingIndex(null);
       
       // Navigate to dashboard after successful creation
-      navigate('/dashboard');
+      navigate('/quizzes');
     } catch (err: any) {
       toast({
         title: 'Error creating quiz',
