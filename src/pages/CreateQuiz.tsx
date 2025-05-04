@@ -220,7 +220,6 @@ const CreateQuiz = () => {
       setCurrentQuestion(defaultQuestion());
       setEditingIndex(null);
       
-      // Navigate to dashboard after successful creation
       navigate('/quizzes');
     } catch (err: any) {
       toast({
