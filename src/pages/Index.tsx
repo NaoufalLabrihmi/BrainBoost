@@ -282,7 +282,7 @@ const Index = () => {
             <Navigation />
             <main className="flex-grow">
               {/* Hero Section - visually stunning dark mode with animated icon and dynamic background */}
-              <section className="relative py-14 md:py-24 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
+              <section className="relative flex items-center justify-center min-h-[80vh] py-24 md:py-36 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
                 {/* Animated background: gradient blobs and floating shapes for competition energy */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                   {/* Animated gradient blobs */}
@@ -297,19 +297,19 @@ const Index = () => {
                     ))}
                   </div>
                 </div>
-                <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center">
+                <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center justify-center">
                   <div className="mb-6 animate-bounce-slow">
                     <GraduationCap className="w-20 h-20 text-cyan-400 drop-shadow-cyan-glow" />
                   </div>
-                  <h1 className="text-5xl md:text-7xl font-extrabold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-cyan-glow animate-fadeIn">Brain Boost</h1>
-                  <p className="text-2xl md:text-3xl font-semibold text-cyan-100 mb-6 max-w-2xl mx-auto animate-slideUp flex items-center justify-center gap-3">
+                  <h1 className="text-5xl md:text-7xl font-extrabold mb-2 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-cyan-glow animate-fadeIn">Brain Boost</h1>
+                  <p className="text-xl md:text-2xl font-medium text-cyan-100 mb-2 max-w-2xl mx-auto animate-slideUp flex items-center justify-center gap-3">
                     The Ultimate Learning Competition Platform
                     <span className="inline-block animate-bounce"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg></span>
                   </p>
-                  <p className="text-lg md:text-xl text-cyan-200/90 max-w-3xl mx-auto mb-10 animate-fadeIn">
-                    Compete in interactive quizzes, climb the leaderboard, earn points, and unlock real rewards. Join a vibrant community where every answer brings you closer to victory. Are you ready to challenge your friends and become a champion of knowledge?
+                  <p className="text-base md:text-lg text-cyan-200/90 max-w-3xl mx-auto mb-8 animate-fadeIn">
+                    Compete in quizzes, climb the leaderboard, earn points, and unlock real rewards. Join a vibrant community where every answer brings you closer to victory.
                   </p>
-                  <div className="flex flex-col md:flex-row justify-center gap-4 max-w-md mx-auto animate-fadeIn">
+                  <div className="flex flex-col md:flex-row justify-center gap-4 max-w-md mx-auto animate-fadeIn mt-2">
                     {!user && (
                       <>
                         <Dialog open={signupOpen} onOpenChange={setSignupOpen}>
@@ -356,14 +356,14 @@ const Index = () => {
                 </div>
               </section>
               {/* Features Section - visually distinct, animated cards */}
-              <section className="py-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+              <section className="py-16 md:py-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
                 <div className="container mx-auto px-4">
                   <h2 className="text-4xl font-bold text-center mb-14 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-cyan-glow animate-fadeIn">Why Brain Boost?</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
                     {/* Quiz Feature */}
-                    <div className="bg-gradient-to-br from-cyan-900/60 to-blue-900/60 rounded-3xl shadow-2xl p-10 text-left border-l-4 border-cyan-400/40 hover:scale-105 transition-transform duration-300 animate-slideUp delay-100">
-                      <div className="w-16 h-16 bg-cyan-700/30 rounded-xl flex items-center justify-center mb-6 shadow-cyan-glow animate-bounce">
-                        <GraduationCap className="h-9 w-9 text-cyan-300" />
+                    <div className="bg-gradient-to-br from-cyan-900/60 to-blue-900/60 rounded-3xl shadow-2xl p-8 flex flex-col items-start justify-between min-h-[340px] text-left border-l-4 border-cyan-400/40 hover:scale-[1.03] hover:shadow-cyan-500/10 transition-transform duration-300 animate-slideUp delay-100">
+                      <div className="w-14 h-14 bg-cyan-700/30 rounded-xl flex items-center justify-center mb-5 shadow-cyan-glow animate-bounce">
+                        <GraduationCap className="h-8 w-8 text-cyan-300" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2 text-cyan-100">Interactive Quizzes</h3>
                       <p className="text-cyan-200/90">
@@ -371,8 +371,8 @@ const Index = () => {
                       </p>
                     </div>
                     {/* Points Feature */}
-                    <div className="bg-gradient-to-br from-blue-900/60 to-cyan-900/60 rounded-2xl shadow-xl p-8 text-center border-t-4 border-blue-400/40 hover:scale-105 transition-transform duration-300 animate-slideUp delay-200">
-                      <div className="w-16 h-16 bg-blue-700/30 rounded-full flex items-center justify-center mx-auto mb-5 shadow-cyan-glow animate-bounce">
+                    <div className="bg-gradient-to-br from-blue-900/60 to-cyan-900/60 rounded-2xl shadow-xl p-8 flex flex-col items-center justify-between min-h-[340px] text-center border-t-4 border-blue-400/40 hover:scale-[1.03] hover:shadow-blue-500/10 transition-transform duration-300 animate-slideUp delay-200">
+                      <div className="w-14 h-14 bg-blue-700/30 rounded-full flex items-center justify-center mx-auto mb-4 shadow-cyan-glow animate-bounce">
                         <ShoppingBag className="h-8 w-8 text-blue-300" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2 text-blue-100">Points & Rewards</h3>
@@ -381,8 +381,8 @@ const Index = () => {
                       </p>
                     </div>
                     {/* Forum Feature */}
-                    <div className="bg-gradient-to-br from-teal-900/60 to-cyan-900/60 rounded-xl shadow-lg p-7 text-right border-r-4 border-teal-400/40 hover:scale-105 transition-transform duration-300 animate-slideUp delay-300">
-                      <div className="w-14 h-14 bg-teal-700/30 rounded-2xl flex items-center justify-center ml-auto mb-4 shadow-cyan-glow animate-bounce">
+                    <div className="bg-gradient-to-br from-teal-900/60 to-cyan-900/60 rounded-xl shadow-lg p-7 flex flex-col items-end justify-between min-h-[340px] text-right border-r-4 border-teal-400/40 hover:scale-[1.03] hover:shadow-teal-500/10 transition-transform duration-300 animate-slideUp delay-300">
+                      <div className="w-12 h-12 bg-teal-700/30 rounded-2xl flex items-center justify-center ml-auto mb-3 shadow-cyan-glow animate-bounce">
                         <MessageCircle className="h-7 w-7 text-teal-300" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2 text-teal-100">Collaborative Forum</h3>
@@ -394,60 +394,60 @@ const Index = () => {
                 </div>
               </section>
               {/* Testimonials Section - horizontal scroll on mobile, fade-in on desktop */}
-              <section className="py-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+              <section className="py-14 md:py-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
                 <div className="container mx-auto px-4">
                   <h2 className="text-4xl font-bold text-center mb-10 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-cyan-glow animate-fadeIn">What Our Users Say</h2>
-                  <div className="flex gap-8 overflow-x-auto md:grid md:grid-cols-3 md:gap-10 snap-x md:snap-none pb-4 md:pb-0">
+                  <div className="flex gap-6 md:gap-10 overflow-x-auto md:grid md:grid-cols-3 snap-x md:snap-none pb-4 md:pb-0">
                     {/* Teacher Testimonial */}
-                    <div className="min-w-[320px] md:min-w-0 bg-gradient-to-br from-cyan-900/60 to-blue-900/60 rounded-2xl p-8 shadow-xl border border-cyan-700/30 snap-center animate-fadeIn delay-100">
-                      <div className="flex items-center mb-5">
-                        <div className="bg-cyan-500 w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-cyan-glow mr-4">T</div>
+                    <div className="min-w-[280px] md:min-w-0 bg-gradient-to-br from-cyan-900/60 to-blue-900/60 rounded-2xl p-7 shadow-xl border border-cyan-700/30 snap-center animate-fadeIn delay-100 flex flex-col justify-between min-h-[260px]">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-cyan-glow mr-3">T</div>
                         <div>
                           <h4 className="font-semibold text-cyan-100">Emily Rodriguez</h4>
-                          <p className="text-sm text-cyan-200/80">Math Teacher</p>
+                          <p className="text-xs text-cyan-200/80">Math Teacher</p>
                         </div>
                       </div>
-                      <p className="text-cyan-100 text-lg">
-                        "Brain Boost has transformed my classroom. Creating interactive quizzes keeps my students engaged, and the point system motivates them to participate actively."
+                      <p className="text-cyan-100 text-base">
+                        "Brain Boost transformed my classroom. Interactive quizzes keep my students engaged, and the point system motivates them to participate."
                       </p>
                     </div>
                     {/* Student Testimonial */}
-                    <div className="min-w-[320px] md:min-w-0 bg-gradient-to-br from-blue-900/60 to-cyan-900/60 rounded-2xl p-8 shadow-xl border border-blue-700/30 snap-center animate-fadeIn delay-200">
-                      <div className="flex items-center mb-5">
-                        <div className="bg-blue-500 w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-cyan-glow mr-4">S</div>
+                    <div className="min-w-[280px] md:min-w-0 bg-gradient-to-br from-blue-900/60 to-cyan-900/60 rounded-2xl p-7 shadow-xl border border-blue-700/30 snap-center animate-fadeIn delay-200 flex flex-col justify-between min-h-[260px]">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-cyan-glow mr-3">S</div>
                         <div>
                           <h4 className="font-semibold text-blue-100">Alex Johnson</h4>
-                          <p className="text-sm text-blue-200/80">High School Student</p>
+                          <p className="text-xs text-blue-200/80">High School Student</p>
                         </div>
                       </div>
-                      <p className="text-blue-100 text-lg">
-                        "I love competing in quizzes and earning points! The forum helps me when I'm stuck on homework, and I've already redeemed points for some cool prizes."
+                      <p className="text-blue-100 text-base">
+                        "I love competing in quizzes and earning points! The forum helps me when I'm stuck, and I've already redeemed points for cool prizes."
                       </p>
                     </div>
                     {/* Admin Testimonial */}
-                    <div className="min-w-[320px] md:min-w-0 bg-gradient-to-br from-teal-900/60 to-cyan-900/60 rounded-2xl p-8 shadow-xl border border-teal-700/30 snap-center animate-fadeIn delay-300">
-                      <div className="flex items-center mb-5">
-                        <div className="bg-teal-500 w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-cyan-glow mr-4">A</div>
+                    <div className="min-w-[280px] md:min-w-0 bg-gradient-to-br from-teal-900/60 to-cyan-900/60 rounded-2xl p-7 shadow-xl border border-teal-700/30 snap-center animate-fadeIn delay-300 flex flex-col justify-between min-h-[260px]">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-teal-500 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-cyan-glow mr-3">A</div>
                         <div>
                           <h4 className="font-semibold text-teal-100">Michael Thompson</h4>
-                          <p className="text-sm text-teal-200/80">School Administrator</p>
+                          <p className="text-xs text-teal-200/80">School Administrator</p>
                         </div>
                       </div>
-                      <p className="text-teal-100 text-lg">
-                        "As an administrator, I appreciate how Brain Boost provides valuable insights into student engagement and performance while making learning fun."
+                      <p className="text-teal-100 text-base">
+                        "As an admin, I appreciate how Brain Boost gives insights into student engagement and performance while making learning fun."
                       </p>
                     </div>
                   </div>
                 </div>
               </section>
               {/* CTA Section - strong, glowing call to action, competition themed */}
-              <section className="bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-500 py-20">
+              <section className="bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-500 py-14 md:py-20">
                 <div className="container mx-auto px-4 text-center">
-                  <h2 className="text-4xl font-bold text-white mb-6 drop-shadow-cyan-glow animate-fadeIn flex items-center justify-center gap-3">
+                  <h2 className="text-4xl font-bold text-white mb-4 md:mb-6 drop-shadow-cyan-glow animate-fadeIn flex items-center justify-center gap-3">
                     Are You Ready to Compete, Learn, and Win?
                     <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
                   </h2>
-                  <p className="text-white/90 max-w-2xl mx-auto mb-8 text-lg animate-fadeIn">
+                  <p className="text-white/90 max-w-2xl mx-auto mb-6 md:mb-8 text-lg animate-fadeIn">
                     Join Brain Boost today and experience the thrill of learning through competition. Sign up for free and start your journey to the top of the leaderboard!
                   </p>
                   <Button 
