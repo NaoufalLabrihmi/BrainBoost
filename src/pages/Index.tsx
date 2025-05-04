@@ -288,8 +288,6 @@ const Index = () => {
                   {/* Animated gradient blobs */}
                   <div className="absolute left-1/3 top-0 w-[60vw] h-[60vw] bg-gradient-to-br from-cyan-500/30 via-blue-500/20 to-teal-400/20 rounded-full blur-3xl opacity-70 animate-blob-move" />
                   <div className="absolute right-0 top-1/4 w-[40vw] h-[40vw] bg-gradient-to-br from-yellow-400/20 via-pink-400/10 to-cyan-400/10 rounded-full blur-2xl opacity-40 animate-blob-move2" />
-                  {/* Animated floating lines */}
-                  <svg className="absolute left-0 bottom-0 w-full h-32 opacity-30 animate-float-lines" viewBox="0 0 1440 320"><path fill="#22d3ee" fillOpacity="0.2" d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,133.3C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
                   {/* Confetti for competition */}
                   <div className="absolute inset-0 z-10 pointer-events-none">
                     {[...Array(18)].map((_, i) => (
@@ -440,28 +438,27 @@ const Index = () => {
                   </div>
                 </div>
               </section>
-              {/* CTA Section - strong, glowing call to action, competition themed */}
-              <section className="bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-500 py-14 md:py-20">
-                <div className="container mx-auto px-4 text-center">
-                  <h2 className="text-4xl font-bold text-white mb-4 md:mb-6 drop-shadow-cyan-glow animate-fadeIn flex items-center justify-center gap-3">
-                    Are You Ready to Compete, Learn, and Win?
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
-                  </h2>
-                  <p className="text-white/90 max-w-2xl mx-auto mb-6 md:mb-8 text-lg animate-fadeIn">
-                    Join Brain Boost today and experience the thrill of learning through competition. Sign up for free and start your journey to the top of the leaderboard!
-                  </p>
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-cyan-500 hover:bg-gray-100 px-8 font-bold text-lg shadow-cyan-glow animate-bounce flex items-center gap-2"
-                    asChild
-                  >
-                    <Link to="/register">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="inline-block mr-1"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
+              {!user && (
+                <section className="bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-500 py-14 md:py-20">
+                  <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-4xl font-bold text-white mb-4 md:mb-6 drop-shadow-cyan-glow animate-fadeIn flex items-center justify-center gap-3">
+                      Are You Ready to Compete, Learn, and Win?
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
+                    </h2>
+                    <p className="text-white/90 max-w-2xl mx-auto mb-6 md:mb-8 text-lg animate-fadeIn">
+                      Join Brain Boost today and experience the thrill of learning through competition. Sign up for free and start your journey to the top of the leaderboard!
+                    </p>
+                    <Button
+                      size="lg"
+                      className="mx-auto w-full max-w-xs bg-white text-cyan-500 hover:bg-gray-100 px-10 py-4 font-bold text-xl rounded-full shadow-cyan-glow animate-bounce-slow flex items-center justify-center gap-2 transition-all duration-200"
+                      onClick={() => setSignupOpen(true)}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="inline-block mr-2"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
                       Start Competing
-                    </Link>
-                  </Button>
-                </div>
-              </section>
+                    </Button>
+                  </div>
+                </section>
+              )}
             </main>
             <Footer />
           </>
