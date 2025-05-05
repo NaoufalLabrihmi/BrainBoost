@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from '@/components/ui/table';
 import { supabase } from '@/integrations/supabase/client';
-import { Edit2, Trash2 } from 'lucide-react';
+import { Edit2, Trash2, Package } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 // Add a type for the product form state
 interface ProductForm {
@@ -17,6 +18,8 @@ interface ProductForm {
 
 const initialProduct: ProductForm = { name: '', description: '', points_required: '', image_url: '' };
 
+const ITEMS_PER_PAGE = 5;
+
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,6 +31,8 @@ const ProductTable = () => {
   const [refresh, setRefresh] = useState(0);
   // Add search state
   const [searchQuery, setSearchQuery] = useState('');
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Fetch products from Supabase
   useEffect(() => {
@@ -46,6 +51,19 @@ const ProductTable = () => {
   const filteredProducts = searchQuery.trim()
     ? products.filter(p => p.name.toLowerCase().includes(searchQuery.trim().toLowerCase()))
     : products;
+
+  // Pagination logic
+  const totalProducts = filteredProducts.length;
+  const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  // Reset to first page when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const openModal = (product = null) => {
     setEditProduct(product);
@@ -151,10 +169,13 @@ const ProductTable = () => {
     }
   };
   return (
-    <div className="w-full">
-      <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text mb-4">Manage Products</h1>
-      <div className="flex flex-row items-center justify-between mb-6 gap-2">
-        <div className="flex flex-1 max-w-xs w-full relative">
+    <div className="space-y-4">
+      <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+        Manage Products
+      </h1>
+      <div className="flex flex-col sm:flex-row items-center gap-2 mb-4">
+        <div className="relative flex-1 max-w-xs w-full">
+          <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
           <input
             type="text"
             placeholder="Search products..."
@@ -162,55 +183,119 @@ const ProductTable = () => {
             onChange={e => setSearchQuery(e.target.value)}
             className="pl-9 w-full bg-purple-950/50 border-purple-800/50 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-700 rounded-lg py-2 pr-2"
           />
-          <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
         </div>
-        <Button onClick={() => openModal()} className="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-6 py-2 rounded-lg shadow">Add Product</Button>
+        <Button onClick={() => openModal()} className="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-6 py-2 rounded-lg shadow mt-2 sm:mt-0">Add Product</Button>
       </div>
-      <div className="bg-gray-900/70 border border-gray-800 rounded-xl shadow-lg p-0">
-        <Table>
-          <TableCaption className="text-purple-200">All products available for students to buy with points.</TableCaption>
-          <TableHeader>
-            <TableRow className="bg-gray-900/80">
-              <TableHead>Image</TableHead>
-              <TableHead>Product Name</TableHead>
-              <TableHead>Description</TableHead>
-              <TableHead>Points Required</TableHead>
-              <TableHead className="w-24">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredProducts.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={5} className="text-center text-gray-400 py-8">No products found.</TableCell>
+      <div className="rounded-xl border border-gray-800 bg-gray-900/70">
+        <ScrollArea className="max-h-[600px]">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent border-b border-gray-800">
+                <TableHead>Image</TableHead>
+                <TableHead>Product Name</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Points Required</TableHead>
+                <TableHead className="w-24">Actions</TableHead>
               </TableRow>
-            ) : (
-              filteredProducts.map((product, i) => (
-                <TableRow key={product.id} className="hover:bg-purple-900/20 transition-all group">
-                  <TableCell>
-                    {product.image_url ? (
-                      <img src={product.image_url} alt={product.name} className="w-14 h-14 object-cover rounded-lg border border-gray-700" />
-                    ) : (
-                      <span className="inline-block w-14 h-14 bg-gray-800 rounded-lg" />
-                    )}
-                  </TableCell>
-                  <TableCell className="font-semibold text-white">{product.name}</TableCell>
-                  <TableCell className="text-gray-300">{product.description}</TableCell>
-                  <TableCell className="text-blue-200 font-bold">{product.points_required}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Button size="icon" variant="ghost" onClick={() => openModal(product)} className="p-2 rounded-full bg-gray-800/60 hover:bg-blue-700/70 transition-colors" title="Edit product">
-                        <Edit2 className="w-3.5 h-3.5 text-blue-300" />
-                      </Button>
-                      <Button size="icon" variant="ghost" className="p-2 rounded-full bg-gray-800/60 hover:bg-red-700/70 transition-colors" onClick={() => handleDelete(product)} title="Delete product">
-                        <Trash2 className="w-3.5 h-3.5 text-red-300" />
-                      </Button>
+            </TableHeader>
+            <TableBody>
+              {paginatedProducts.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={5} className="h-[200px]">
+                    <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
+                      <Package className="h-8 w-8 mb-2" />
+                      <p className="text-lg font-medium">No products found</p>
+                      <p className="text-sm">
+                        {searchQuery.trim() 
+                          ? `No matches found for "${searchQuery}"`
+                          : 'There are no products in the system yet.'}
+                      </p>
                     </div>
                   </TableCell>
                 </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
+              ) : (
+                paginatedProducts.map((product, i) => (
+                  <TableRow key={product.id} className="hover:bg-purple-900/20 transition-all group">
+                    <TableCell>
+                      {product.image_url ? (
+                        <img src={product.image_url} alt={product.name} className="w-14 h-14 object-cover rounded-lg border border-gray-700" />
+                      ) : (
+                        <span className="inline-block w-14 h-14 bg-gray-800 rounded-lg" />
+                      )}
+                    </TableCell>
+                    <TableCell className="font-semibold text-white">{product.name}</TableCell>
+                    <TableCell className="text-gray-300">{product.description}</TableCell>
+                    <TableCell className="text-blue-200 font-bold">{product.points_required}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <Button size="icon" variant="ghost" onClick={() => openModal(product)} className="p-2 rounded-full bg-gray-800/60 hover:bg-blue-700/70 transition-colors" title="Edit product">
+                          <Edit2 className="w-3.5 h-3.5 text-blue-300" />
+                        </Button>
+                        <Button size="icon" variant="ghost" className="p-2 rounded-full bg-gray-800/60 hover:bg-red-700/70 transition-colors" onClick={() => handleDelete(product)} title="Delete product">
+                          <Trash2 className="w-3.5 h-3.5 text-red-300" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </ScrollArea>
+        {/* Pagination Controls (match PurchaseTable) */}
+        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-800 bg-gray-900/50">
+          <div className="text-sm text-gray-400">
+            Showing {Math.min((currentPage - 1) * ITEMS_PER_PAGE + 1, totalProducts)} to {Math.min(currentPage * ITEMS_PER_PAGE, totalProducts)} of {totalProducts} entries
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="bg-gray-900/70 border-gray-800 text-gray-200 hover:bg-gray-800"
+            >
+              Previous
+            </Button>
+            {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+              let pageNum = i + 1;
+              if (totalPages > 5) {
+                if (currentPage > 3 && currentPage < totalPages - 2) {
+                  pageNum = i === 0 ? 1 
+                    : i === 1 ? currentPage - 1
+                    : i === 2 ? currentPage
+                    : i === 3 ? currentPage + 1
+                    : totalPages;
+                } else if (currentPage >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i;
+                }
+              }
+              return (
+                <Button
+                  key={pageNum}
+                  variant={pageNum === currentPage ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={pageNum === currentPage 
+                    ? "bg-purple-600 hover:bg-purple-700 text-white border-none"
+                    : "bg-gray-900/70 border-gray-800 text-gray-200 hover:bg-gray-800"
+                  }
+                >
+                  {pageNum}
+                </Button>
+              );
+            })}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="bg-gray-900/70 border-gray-800 text-gray-200 hover:bg-gray-800"
+            >
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
       <Dialog open={modalOpen} onOpenChange={closeModal}>
         <DialogContent className="max-w-md w-full bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 border border-purple-700 rounded-2xl shadow-2xl p-8">
