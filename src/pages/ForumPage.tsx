@@ -522,11 +522,11 @@ const ForumPostCard = ({ post, formatDate, setDeleteConfirmId, deleting, setEdit
         {/* Author */}
         <div className="flex items-center gap-4 min-w-0">
           <Avatar className="h-11 w-11 border-2 border-cyan-400 bg-cyan-950 flex-shrink-0">
-            <AvatarImage src={post.author?.avatar_url || ''} />
-            <AvatarFallback className={`${getAvatarGradient(post.author?.role)} text-white font-extrabold text-lg flex items-center justify-center`} style={{ letterSpacing: '-1px', textShadow: '0 2px 8px #0008' }}>
-              {getUserInitialsFromObj(post.author)}
-            </AvatarFallback>
-          </Avatar>
+              <AvatarImage src={post.author?.avatar_url || ''} />
+              <AvatarFallback className={`${getAvatarGradient(post.author?.role)} text-white font-extrabold text-lg flex items-center justify-center`} style={{ letterSpacing: '-1px', textShadow: '0 2px 8px #0008' }}>
+                {getUserInitialsFromObj(post.author)}
+              </AvatarFallback>
+            </Avatar>
           <div className="min-w-0 flex flex-col gap-0.5">
             <span className="text-base font-extrabold truncate block max-w-[120px] sm:max-w-[180px] text-cyan-100/90">{post.author?.username || 'Unknown'}</span>
             <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-cyan-800/40 border border-cyan-700/30 text-cyan-200 capitalize truncate w-fit">{post.author?.role || 'student'}</span>

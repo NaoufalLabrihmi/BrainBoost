@@ -459,26 +459,26 @@ const QuizPage = () => {
                 <div className="flex items-center gap-3 w-full justify-center flex-wrap">
                   <Rocket className="h-7 w-7 text-cyan-400 animate-float" />
                   <h1 className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-lg text-center break-words max-w-full line-clamp-2">
-                    {quiz.title}
-                  </h1>
+              {quiz.title}
+            </h1>
                   <Badge className={getStatusColor(quiz.status) + ' text-base px-4 py-1.5 rounded-full shadow-lg animate-fade-in ml-0 sm:ml-4'}>
-                    {quiz.status.charAt(0).toUpperCase() + quiz.status.slice(1)}
-                  </Badge>
+                {quiz.status.charAt(0).toUpperCase() + quiz.status.slice(1)}
+              </Badge>
                 </div>
                 <div className="w-full border-t border-cyan-700/40 my-3"></div>
                 <div className="flex flex-col items-center w-full">
                   <span className="uppercase text-cyan-300 tracking-widest text-sm sm:text-base font-semibold mb-1">Access Code</span>
                   <div className="flex flex-col sm:flex-row items-center justify-center bg-cyan-900/60 px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-lg border border-cyan-700 transition-transform duration-200 hover:scale-105 hover:shadow-2xl w-full max-w-full mx-auto">
                     <span className="font-mono text-lg sm:text-3xl text-white tracking-widest select-all mr-0 sm:mr-3 break-all line-clamp-1 text-center w-full sm:w-auto">{quiz.access_code}</span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
+                <Button
+                  variant="ghost"
+                  size="icon"
                       className="h-8 w-8 sm:h-9 sm:w-9 text-cyan-400 hover:text-white mt-2 sm:mt-0"
-                      onClick={() => handleCopyCode(quiz.access_code)}
+                  onClick={() => handleCopyCode(quiz.access_code)}
                       aria-label="Copy access code"
-                    >
+                >
                       <Copy className="h-5 w-5 sm:h-6 sm:w-6" />
-                    </Button>
+                </Button>
                   </div>
                 </div>
               </div>

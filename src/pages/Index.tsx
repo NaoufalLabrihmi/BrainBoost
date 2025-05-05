@@ -332,20 +332,20 @@ const Index = () => {
             <main className="flex-grow">
               {/* HERO SECTION */}
               <section
-                className="relative flex items-center justify-center min-h-[80vh] py-24 md:py-36 overflow-hidden"
+                className="relative flex flex-col min-h-[60vh] py-10 md:py-16 overflow-hidden justify-start"
                 style={{ backgroundImage: "url('/lofi.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
               >
                 {/* Subtle dreamy overlay for readability, less opacity */}
                 <div className="absolute inset-0 z-0" style={{ background: 'linear-gradient(120deg, rgba(34,211,238,0.18) 0%, rgba(59,130,246,0.18) 40%, rgba(20,184,166,0.12) 100%)', backdropFilter: 'blur(4px)' }} />
-                <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center justify-center">
-                  {/* Animated mascot/character */}
-                  <div className="mb-6 animate-bounce-slow">
-                    <span className="inline-block rounded-full bg-gradient-to-br from-cyan-400 via-blue-400 to-teal-400 p-2 shadow-lg">
-                      {/* Brain Boost Logo (GraduationCap) */}
-                      <GraduationCap className="w-20 h-20 md:w-28 md:h-28 text-cyan-100 drop-shadow-cyan-glow" style={{ filter: 'drop-shadow(0 0 32px #22d3ee88)' }} />
-                    </span>
-                  </div>
-                  <h1 className="text-6xl md:text-8xl font-extrabold mb-3 bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x drop-shadow-[0_4px_32px_rgba(34,211,238,0.25)] font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight animate-fadeIn">
+                {/* Mascot/Icon at the very top */}
+                <div className="w-full flex justify-center z-10 mt-2 mb-2">
+                  <span className="inline-block rounded-full bg-gradient-to-br from-cyan-400 via-blue-400 to-teal-400 p-2 shadow-lg animate-bounce-slow">
+                    <GraduationCap className="w-20 h-20 md:w-28 md:h-28 text-cyan-100 drop-shadow-cyan-glow" style={{ filter: 'drop-shadow(0 0 32px #22d3ee88)' }} />
+                  </span>
+                </div>
+                {/* Centered text block */}
+                <div className="container mx-auto px-4 relative z-10 text-center flex-1 flex flex-col items-center justify-center">
+                  <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x drop-shadow-[0_4px_32px_rgba(34,211,238,0.25)] font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight animate-fadeIn max-w-md mx-auto break-words">
                     Compete. <span className="text-white/90">Learn.</span> <span className="text-cyan-200">Win.</span>
                   </h1>
                   <p className="text-3xl md:text-4xl font-black mb-3 bg-gradient-to-r from-cyan-200 via-blue-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-cyan-glow animate-slideUp font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight">
@@ -462,7 +462,7 @@ const Index = () => {
                     <div className="relative max-w-2xl w-full mx-auto rounded-3xl bg-gradient-to-br from-cyan-900/80 to-blue-900/80 border-4 border-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 p-8 flex flex-col gap-4 shadow-2xl backdrop-blur-2xl animate-fadeIn" style={{ boxShadow: '0 0 48px 8px #a5b4fc55, 0 2px 32px 0 #818cf899' }}>
                       {/* Leaderboard entries */}
                       <div className="flex flex-col gap-4 max-h-80 overflow-y-auto animate-scroll-leaderboard custom-scrollbar relative">
-                        {[{name:'Alex',points:320,icon:'🧑‍🎓',color:'bg-cyan-500'},{name:'Sam',points:290,icon:'👩‍🏫',color:'bg-blue-500'},{name:'Maya',points:260,icon:'🧑‍💻',color:'bg-purple-500'},{name:'Liam',points:220,icon:'🧑‍🔬',color:'bg-yellow-400'},{name:'Zoe',points:200,icon:'🧑‍🎤',color:'bg-pink-500'}].map((u,i)=>{
+                        {[{name:'Alex',points:320,icon:'🧑‍🎓',color:'bg-cyan-500'},{name:'Sam',points:290,icon:'👩‍🏫',color:'bg-blue-500'},{name:'Maya',points:260,icon:'🧑‍💻',color:'bg-purple-500'},{name:'Liam',points:220,icon:'🧑‍🔬',color:'bg-yellow-400'},{name:'Zoe',points:200,icon:'🧑‍🎓',color:'bg-pink-500'}].map((u,i)=>{
                           const percent = Math.max(20, Math.round((u.points/320)*100));
                           return (
                             <div key={u.name} className={`relative flex items-center gap-4 px-6 py-4 rounded-2xl ${u.color} bg-opacity-30 group transition-all duration-200 hover:bg-opacity-50 shadow-cyan-glow`}> 
@@ -549,49 +549,8 @@ const Index = () => {
                   </div>
                 </div>
               </section>
-
-              {/* CTA Footer Section */}
-              {!user && (
-                <section className="bg-gradient-to-r from-cyan-900/80 via-blue-900/80 to-purple-900/80 border-t-2 border-cyan-400/30 backdrop-blur-2xl py-14 md:py-20 relative">
-                  <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="w-full h-full bg-gradient-to-br from-cyan-900/30 via-blue-900/20 to-purple-900/30 blur-xl" />
-                    <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-400/30 rounded-full blur-2xl animate-pulse-slow" />
-                    <div className="absolute top-2/3 right-1/4 w-24 h-24 bg-purple-400/30 rounded-full blur-2xl animate-pulse-slow delay-200" />
-                    <div className="absolute bottom-10 left-1/3 w-20 h-20 bg-blue-400/30 rounded-full blur-2xl animate-pulse-slow delay-400" />
-                  </div>
-                  <div className="container mx-auto px-4 text-center relative z-10">
-                    <h2 className="text-4xl font-bold text-white mb-4 md:mb-6 drop-shadow-cyan-glow animate-fadeIn flex items-center justify-center gap-3 font-['Orbitron',_sans-serif]">
-                      Are You Ready to Compete, Learn, and Win?
-                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
-                    </h2>
-                    <p className="text-white/90 max-w-2xl mx-auto mb-6 md:mb-8 text-lg animate-fadeIn font-['Orbitron',_sans-serif]">
-                      Join Brain Boost today and experience the thrill of learning through competition. Sign up for free and start your journey to the top of the leaderboard!
-                    </p>
-                    <Button
-                      size="lg"
-                      className="mx-auto w-full max-w-xs bg-white text-cyan-500 hover:bg-gray-100 px-10 py-4 font-bold text-xl rounded-full shadow-cyan-glow animate-bounce-slow flex items-center justify-center gap-2 transition-all duration-200"
-                      onClick={() => setSignupOpen(true)}
-                    >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="inline-block mr-2"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" fill="#facc15"/></svg>
-                      Start Competing
-                    </Button>
-                  </div>
-                </section>
-              )}
             </main>
-            <footer className="w-full bg-gradient-to-r from-cyan-900/80 via-blue-900/80 to-purple-900/80 border-t-2 border-cyan-400/30 backdrop-blur-2xl py-8 px-4 flex flex-col md:flex-row items-center justify-between gap-6 mt-12 shadow-cyan-glow">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-['Orbitron',_sans-serif] drop-shadow-cyan-glow">Brain Boost</span>
-                <span className="text-cyan-200 text-lg font-semibold">|</span>
-                <span className="text-cyan-100 text-base font-medium">Gamify your learning journey</span>
-              </div>
-              <div className="flex items-center gap-5">
-                <a href="#" className="text-cyan-300 hover:text-purple-400 transition drop-shadow-cyan-glow" aria-label="Twitter"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M22 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 12 9.482c0 .352.04.695.116 1.022C8.728 10.36 5.7 8.7 3.671 6.149a4.48 4.48 0 0 0-.607 2.256c0 1.557.793 2.933 2.002 3.74a4.48 4.48 0 0 1-2.03-.561v.057a4.48 4.48 0 0 0 3.6 4.393 4.48 4.48 0 0 1-2.025.077 4.48 4.48 0 0 0 4.18 3.11A8.98 8.98 0 0 1 2 19.07a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.78 0-.195-.004-.39-.013-.583A9.14 9.14 0 0 0 24 4.59a8.94 8.94 0 0 1-2.58.708z" fill="currentColor"/></svg></a>
-                <a href="#" className="text-cyan-300 hover:text-purple-400 transition drop-shadow-cyan-glow" aria-label="Instagram"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></a>
-                <a href="#" className="text-cyan-300 hover:text-purple-400 transition drop-shadow-cyan-glow" aria-label="Discord"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M20.317 4.369A19.791 19.791 0 0 0 16.885 3.2a.112.112 0 0 0-.12.056c-.523.927-1.104 2.13-1.513 3.084a18.36 18.36 0 0 0-5.504 0c-.41-.954-.99-2.157-1.513-3.084a.112.112 0 0 0-.12-.056A19.791 19.791 0 0 0 3.683 4.369a.105.105 0 0 0-.047.043C1.605 7.362.322 10.274.076 13.246a.115.115 0 0 0 .042.09c2.104 1.547 4.144 2.488 6.163 3.11a.112.112 0 0 0 .123-.042c.474-.65.895-1.34 1.255-2.066a.112.112 0 0 0-.062-.155c-.672-.254-1.31-.563-1.917-.927a.112.112 0 0 1-.011-.186c.129-.098.258-.197.382-.297a.112.112 0 0 1 .114-.013c4.016 1.84 8.36 1.84 12.344 0a.112.112 0 0 1 .115.012c.124.1.253.199.382.297a.112.112 0 0 1-.011.186c-.607.364-1.245.673-1.917.927a.112.112 0 0 0-.062.155c.36.726.78 1.416 1.255 2.066a.112.112 0 0 0 .123.042c2.02-.622 4.06-1.563 6.163-3.11a.115.115 0 0 0 .042-.09c-.246-2.972-1.529-5.884-3.56-8.834a.105.105 0 0 0-.047-.043zM8.02 15.331c-1.01 0-1.84-.924-1.84-2.06 0-1.137.818-2.06 1.84-2.06 1.025 0 1.85.93 1.84 2.06 0 1.136-.818 2.06-1.84 2.06zm7.96 0c-1.01 0-1.84-.924-1.84-2.06 0-1.137.818-2.06 1.84-2.06 1.025 0 1.85.93 1.84 2.06 0 1.136-.818 2.06-1.84 2.06z" fill="currentColor"/></svg></a>
-              </div>
-              <div className="text-cyan-400 text-xs mt-2 md:mt-0">© {new Date().getFullYear()} Brain Boost. All rights reserved.</div>
-            </footer>
+            <Footer />
           </>
         )}
       </div>

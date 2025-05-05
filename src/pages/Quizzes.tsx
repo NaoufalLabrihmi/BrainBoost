@@ -578,43 +578,43 @@ const Quizzes = () => {
                       className="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-2 sm:gap-2 items-stretch justify-stretch pt-4"
                     >
                       <div className="w-full sm:w-auto">
-                        <StatusActionPill
-                          status={quiz.status}
-                          loading={!!statusLoading[quiz.id]}
-                          onAction={() => {
-                            if (quiz.status === 'draft' || quiz.status === 'archived') handleChangeQuizStatus(quiz.id, 'published');
-                            else if (quiz.status === 'published') handleChangeQuizStatus(quiz.id, 'archived');
-                          }}
-                        />
+                      <StatusActionPill
+                        status={quiz.status}
+                        loading={!!statusLoading[quiz.id]}
+                        onAction={() => {
+                          if (quiz.status === 'draft' || quiz.status === 'archived') handleChangeQuizStatus(quiz.id, 'published');
+                          else if (quiz.status === 'published') handleChangeQuizStatus(quiz.id, 'archived');
+                        }}
+                      />
                       </div>
                       <div className="flex flex-row gap-2 w-full sm:w-auto justify-end">
-                        <Button
-                          variant="outline"
-                          size="icon"
+                      <Button
+                        variant="outline"
+                        size="icon"
                           className="flex-1 sm:flex-none min-w-0 text-cyan-300 border-cyan-500 hover:bg-cyan-900"
-                          onClick={() => navigate(`/quiz/${quiz.id}`)}
-                        >
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="icon"
+                        onClick={() => navigate(`/quiz/${quiz.id}`)}
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
                           className="flex-1 sm:flex-none min-w-0 text-cyan-300 border-cyan-500 hover:bg-cyan-900"
-                          onClick={() => navigate(`/edit-quiz/${quiz.id}`)}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="icon"
+                      onClick={() => navigate(`/edit-quiz/${quiz.id}`)}
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
                           className="flex-1 sm:flex-none min-w-0 text-red-300 border-red-500 hover:bg-red-900"
-                          onClick={() => handleDeleteQuiz(quiz.id)}
-                        >
-                          <Trash className="h-4 w-4" />
-                        </Button>
+                      onClick={() => handleDeleteQuiz(quiz.id)}
+                    >
+                      <Trash className="h-4 w-4" />
+                    </Button>
                       </div>
-                    </CardFooter>
-                  </Card>
+                  </CardFooter>
+                </Card>
               ))
             )}
           </div>

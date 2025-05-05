@@ -231,20 +231,20 @@ export function Navigation() {
                       <div className="flex flex-col items-center gap-1 px-2 pt-4 pb-3">
                         <div className="text-lg font-extrabold bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-clip-text text-transparent text-center truncate w-full font-['Orbitron',_Montserrat,_Poppins,_sans-serif]">{getUserDisplayName(user)}</div>
                         <span className={`inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-bold tracking-wide bg-gradient-to-r from-cyan-800/60 via-blue-800/60 to-teal-800/60 text-cyan-200`}>{profile?.role ? profile.role.charAt(0).toUpperCase() + profile.role.slice(1) : ''}</span>
-                        {profile?.role === 'student' && (
+                          {profile?.role === 'student' && (
                           <span className="mt-1 text-sm font-bold text-yellow-300 bg-yellow-900/30 rounded-full px-3 py-0.5">Points: {profile?.points ?? 0}</span>
-                        )}
-                      </div>
-                      <DropdownMenuSeparator className="my-2 bg-cyan-800/40" />
-                      <DropdownMenuItem
+                          )}
+                        </div>
+                        <DropdownMenuSeparator className="my-2 bg-cyan-800/40" />
+                        <DropdownMenuItem
                         className="rounded-xl px-4 py-3 font-bold text-white bg-gradient-to-r from-red-500 via-cyan-700 to-blue-700 hover:scale-105 transition-all duration-200 flex items-center gap-3 cursor-pointer font-['Inter',_Poppins,_sans-serif]"
-                        onClick={handleSignOut}
-                      >
-                        <X className="w-5 h-5" />
-                        <span>Sign out</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                          onClick={handleSignOut}
+                        >
+                          <X className="w-5 h-5" />
+                          <span>Sign out</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                 </>
               ) : (
                 <div className="flex items-center space-x-3">
@@ -260,7 +260,7 @@ export function Navigation() {
             {/* Mobile Purchases Icon and Menu Button (side by side, no extra margin) */}
             <div className="md:hidden flex items-center gap-1">
               {user && profile?.role === 'student' && (
-                <button
+            <button
                   className="relative p-2 rounded-full bg-gradient-to-tr from-cyan-900 via-blue-900 to-cyan-900 focus:outline-none focus:ring-2 focus:ring-cyan-400/80"
                   onClick={() => setIsPurchasesOpen(true)}
                   aria-label="My Purchases"
@@ -270,8 +270,8 @@ export function Navigation() {
                     <span className="absolute -top-1 -right-1 bg-yellow-400 text-gray-900 text-xs rounded-full px-1.5 py-0.5 border-2 border-white animate-pulse">
                       {purchases.filter(p => p.status === 'pending').length}
                     </span>
-                  )}
-                </button>
+              )}
+            </button>
               )}
             </div>
           </div>
@@ -342,13 +342,13 @@ export function Navigation() {
             <Link to="/forum" className="flex flex-col items-center flex-1 py-2 group" aria-label="Forum">
               <MessageCircle className="w-7 h-7 text-cyan-300 group-hover:text-cyan-400 transition" />
               <span className="text-xs font-bold text-cyan-100 mt-0.5">Forum</span>
-            </Link>
+                      </Link>
             {/* Profile (all roles, opens dropdown) */}
             <button
               className="flex flex-col items-center flex-1 py-2 group focus:outline-none"
               aria-label="Profile"
               onClick={() => setShowProfileDropdown((v) => !v)}
-            >
+                      >
               <Avatar className="w-7 h-7 border-2 border-cyan-400">
                 {user?.user_metadata?.avatar_url ? (
                   <AvatarImage src={user.user_metadata.avatar_url} alt={user.email || ''} />
@@ -359,7 +359,7 @@ export function Navigation() {
                 )}
               </Avatar>
               <span className="text-xs font-bold text-cyan-100 mt-0.5">Profile</span>
-            </button>
+                    </button>
           </div>
           {/* Profile Dropdown for Mobile */}
           {showProfileDropdown && (
@@ -368,13 +368,13 @@ export function Navigation() {
               <div className="relative w-full max-w-xs mx-auto mb-24 bg-gradient-to-br from-cyan-900/90 via-blue-900/90 to-teal-900/90 border-2 border-cyan-500/40 rounded-2xl p-6 flex flex-col items-center animate-fadeIn" onClick={e => e.stopPropagation()}>
                 <div className="text-lg font-extrabold bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-clip-text text-transparent text-center truncate w-full font-['Orbitron',_Montserrat,_Poppins,_sans-serif]">{getUserDisplayName(user)}</div>
                 <span className="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-bold tracking-wide bg-gradient-to-r from-cyan-800/60 via-blue-800/60 to-teal-800/60 text-cyan-200">{profile?.role ? profile.role.charAt(0).toUpperCase() + profile.role.slice(1) : ''}</span>
-                {profile?.role === 'student' && (
+                  {profile?.role === 'student' && (
                   <span className="mt-1 text-sm font-bold text-yellow-300 bg-yellow-900/30 rounded-full px-3 py-0.5">Points: {profile?.points ?? 0}</span>
-                )}
-                <button
+                  )}
+                      <button
                   className="mt-4 w-full rounded-xl px-4 py-3 font-bold text-white bg-gradient-to-r from-red-500 via-cyan-700 to-blue-700 hover:scale-105 transition-all duration-200 flex items-center justify-center gap-3 font-['Inter',_Poppins,_sans-serif]"
                   onClick={handleSignOut}
-                >
+                      >
                   <X className="w-5 h-5" />
                   <span>Sign out</span>
                 </button>
@@ -386,17 +386,17 @@ export function Navigation() {
             <div className="fixed inset-0 z-50 flex items-end justify-center md:hidden" onClick={() => setIsPurchasesOpen(false)}>
               <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
               <div className="relative w-full max-w-md mx-auto mb-24" onClick={e => e.stopPropagation()}>
-                <StudentPurchaseDropdown
-                  purchases={purchases}
-                  loading={purchasesLoading}
+                        <StudentPurchaseDropdown
+                          purchases={purchases}
+                          loading={purchasesLoading}
                   onClose={() => setIsPurchasesOpen(false)}
                   isMobile={true}
                 />
-              </div>
+                </div>
             </div>
           )}
         </>
-      )}
+        )}
       <style>{`
         @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
         .animate-bounce-slow { animation: bounce-slow 2.2s infinite; }
