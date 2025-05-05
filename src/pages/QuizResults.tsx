@@ -219,7 +219,7 @@ export default function QuizResults() {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/')}
                 className="mr-2 text-blue-200 hover:bg-blue-900/30 backdrop-blur-md"
               >
                 <ChevronLeft className="h-4 w-4 mr-2" />
@@ -244,7 +244,7 @@ export default function QuizResults() {
           <div className="text-center">
             <h1 className="text-4xl font-black mb-4">Quiz Not Found</h1>
             <p className="text-lg text-cyan-200 mb-8">Sorry, we couldn't find this quiz or it has been deleted.</p>
-            <Button onClick={() => navigate('/dashboard')} className="bg-cyan-700 text-white font-bold px-6 py-3 rounded-xl shadow-cyan-glow">Back to Dashboard</Button>
+            <Button onClick={() => navigate('/')} className="bg-cyan-700 text-white font-bold px-6 py-3 rounded-xl shadow-cyan-glow">Back to Home</Button>
         </div>
         </main>
       </div>
@@ -265,7 +265,7 @@ export default function QuizResults() {
             <Button 
               variant="ghost" 
               size="sm" 
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/')}
               className="mr-2 text-blue-200 hover:bg-blue-900/30 backdrop-blur-md"
             >
               <ChevronLeft className="h-4 w-4 mr-2" />
@@ -472,6 +472,7 @@ export default function QuizResults() {
                 </motion.div>
               )}
               {/* Actions Card */}
+              {userRole === 'teacher' && (
               <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.7 }}>
                 <Card className="border-0 shadow-xl rounded-3xl bg-gradient-to-b from-[#162032]/95 to-[#0a1626]/90 backdrop-blur-xl ring-2 ring-cyan-700/30 hover:ring-cyan-400/40 transition-all duration-300">
                 <CardHeader>
@@ -481,9 +482,9 @@ export default function QuizResults() {
                   <Button 
                       className="w-full justify-start bg-cyan-900/40 hover:bg-cyan-900/60 text-cyan-200 font-bold shadow-xl" 
                     variant="secondary"
-                    onClick={() => navigate('/dashboard')}
+                    onClick={() => navigate('/')}
                   >
-                      <Home className="mr-2 h-5 w-5" /> Go to Dashboard
+                      <Home className="mr-2 h-5 w-5" /> Go to Home
                   </Button>
                   <Button 
                       className="w-full justify-start bg-cyan-900/40 hover:bg-cyan-900/60 text-cyan-200 font-bold shadow-xl" 
@@ -494,6 +495,7 @@ export default function QuizResults() {
                 </CardContent>
               </Card>
               </motion.div>
+              )}
             </div>
           </div>
         </div>

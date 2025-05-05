@@ -38,6 +38,7 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
   const [totalPoints, setTotalPoints] = useState(0);
   const [loadingButtons, setLoadingButtons] = useState(true);
   const [shortAnswer, setShortAnswer] = useState('');
+  const [showBriefConfirmation, setShowBriefConfirmation] = useState(false);
   const navigate = useNavigate();
   const lastQuestionIndexRef = useRef<number | null>(null);
 
@@ -215,11 +216,6 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
 
     if (error) {
       console.error('Error fetching session:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to fetch session',
-        variant: 'destructive',
-      });
       return;
     }
 
@@ -292,19 +288,10 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
 
       // Immediately fetch the answer and up-to-date total points to update UI
       await fetchAnswerResult();
-
-      toast({
-        title: 'Answer Submitted',
-        description: 'Your answer has been recorded',
-        variant: 'default',
-      });
+      setShowBriefConfirmation(true);
+      setTimeout(() => setShowBriefConfirmation(false), 2000);
     } catch (error) {
       console.error('Error submitting answer:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to submit answer',
-        variant: 'destructive',
-      });
     }
   };
   
@@ -369,12 +356,6 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
         setTimeout(() => {
           setShowResultDialog(true);
         }, 100);
-        
-        toast({
-          title: data.is_correct ? 'Correct!' : 'Incorrect',
-          description: `You earned ${data.points_earned} points!`,
-          variant: data.is_correct ? 'default' : 'destructive',
-        });
       } else if (hasAnswered) {
         // Try again after a short delay in case of race condition
         setTimeout(fetchAnswerResult, 300);
@@ -384,12 +365,6 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
         console.log('No answer found for this question');
         setIsAnswerCorrect(false);
         setEarnedPoints(0);
-        
-        toast({
-          title: 'No Answer',
-          description: 'You did not submit an answer for this question',
-          variant: 'destructive',
-        });
       }
       
       // Always show the dialog regardless of data
@@ -689,33 +664,6 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
                     </p>
                   </motion.div>
                 )}
-                {/* Result dialog when question ends */}
-                {hasAnswered && session?.status === 'question_ended' && isAnswerCorrect !== null && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center space-y-4 mt-6"
-                  >
-                    <div className="flex items-center justify-center">
-                      {isAnswerCorrect ? (
-                        <CheckCircle className="h-16 w-16 text-green-400 animate-podium-glow" />
-                      ) : (
-                        <XCircle className="h-16 w-16 text-red-400 animate-podium-glow" />
-                      )}
-                    </div>
-                    <div>
-                      <p className="serif-heading text-2xl font-black animate-gradient-x mb-2">
-                        {isAnswerCorrect ? 'Correct!' : 'Incorrect'}
-                      </p>
-                      <p className="text-lg text-cyan-200 font-bold">
-                        {isAnswerCorrect ? `You earned ${earnedPoints} points` : 'No points earned'}
-                      </p>
-                      <p className="text-base text-cyan-400 mt-2">
-                        Correct answer: {currentQuestion?.correct_answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
               </AnimatePresence>
             </>
           )}
@@ -786,13 +734,18 @@ export function StudentQuizView({ quizId, sessionId, questions, userId }: Props)
       </Dialog>
         {/* Floating Exit Quiz Button */}
         <button
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/')}
           className="fab-exit"
           aria-label="Exit Quiz"
         >
           Exit
         </button>
       </div>
+      {showBriefConfirmation && (
+        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-cyan-900/90 text-cyan-100 px-6 py-3 rounded-2xl shadow-cyan-glow font-bold text-lg animate-fade-in">
+          Answer submitted!
+        </div>
+      )}
     </div>
   );
 } 

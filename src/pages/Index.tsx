@@ -332,7 +332,7 @@ const Index = () => {
             <main className="flex-grow">
               {/* HERO SECTION */}
               <section
-                className="relative flex flex-col min-h-[60vh] py-10 md:py-16 overflow-hidden justify-start"
+                className="relative flex flex-col min-h-[90vh] py-10 md:py-16 overflow-hidden justify-start"
                 style={{ backgroundImage: "url('/lofi.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
               >
                 {/* Subtle dreamy overlay for readability, less opacity */}

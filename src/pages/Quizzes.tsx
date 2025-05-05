@@ -535,49 +535,29 @@ const Quizzes = () => {
               </div>
             ) : (
               paginatedQuizzes.map((quiz) => (
-                  <Card key={quiz.id} className="overflow-hidden bg-gray-900 border border-cyan-800/60">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <CardTitle className="text-xl font-bold text-white">{quiz.title}</CardTitle>
-                          <CardDescription className="text-cyan-300 mt-1">
-                          {quiz.description || 'No description provided'}
-                        </CardDescription>
-                      </div>
-                      <Badge className={getStatusColor(quiz.status)}>
-                        {quiz.status.charAt(0).toUpperCase() + quiz.status.slice(1)}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm text-gray-400">
-                        <span className="mr-2">Questions:</span>
-                        <span className="text-white">{quiz.question_count}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-400">
-                        <span className="mr-2">Access Code:</span>
-                        <div className="flex items-center">
-                          <span className="text-white font-mono mr-2">{quiz.access_code}</span>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                              className="h-6 w-6 text-cyan-400 hover:text-white"
-                            onClick={() => handleCopyCode(quiz.access_code)}
-                          >
+                <Card key={quiz.id} className="relative flex flex-col justify-between min-h-[340px] bg-gradient-to-br from-cyan-900/80 to-blue-900/80 border border-cyan-700/40 rounded-3xl shadow-xl p-6 transition-transform duration-200 hover:scale-[1.03] hover:shadow-2xl overflow-hidden">
+                  {/* Status badge in top right */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <Badge className={getStatusColor(quiz.status)}>{quiz.status.charAt(0).toUpperCase() + quiz.status.slice(1)}</Badge>
+                  </div>
+                  {/* Main content: title and description */}
+                  <div className="flex-1 flex flex-col gap-2 h-full">
+                    <h3 className="text-2xl font-bold text-white break-words mb-1">{quiz.title}</h3>
+                    <p className="text-cyan-300 mb-2 line-clamp-2 min-h-[2.5em]">{quiz.description || 'No description provided'}</p>
+                  </div>
+                  {/* Bottom row: left = meta/status, right = icons */}
+                  <div className="flex flex-row justify-between items-end mt-4 w-full">
+                    {/* Bottom left: meta info and status action */}
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-wrap gap-3 text-sm text-cyan-100/80">
+                        <span className="flex items-center gap-1"><b>{quiz.question_count}</b> Questions</span>
+                        <span className="flex items-center gap-1">Access Code: <span className="font-mono text-cyan-200">{quiz.access_code}</span>
+                          <Button variant="ghost" size="icon" className="h-6 w-6 text-cyan-400 hover:text-white" onClick={() => handleCopyCode(quiz.access_code)}>
                             <Copy className="h-4 w-4" />
                           </Button>
-                        </div>
+                        </span>
+                        <span>Created: {new Date(quiz.created_at).toLocaleDateString()}</span>
                       </div>
-                      <div className="text-sm text-gray-400">
-                        Created: {new Date(quiz.created_at).toLocaleDateString()}
-                      </div>
-                    </div>
-                  </CardContent>
-                    <CardFooter
-                      className="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-2 sm:gap-2 items-stretch justify-stretch pt-4"
-                    >
-                      <div className="w-full sm:w-auto">
                       <StatusActionPill
                         status={quiz.status}
                         loading={!!statusLoading[quiz.id]}
@@ -586,34 +566,38 @@ const Quizzes = () => {
                           else if (quiz.status === 'published') handleChangeQuizStatus(quiz.id, 'archived');
                         }}
                       />
-                      </div>
-                      <div className="flex flex-row gap-2 w-full sm:w-auto justify-end">
+                    </div>
+                    {/* Bottom right: action icons vertical */}
+                    <div className="flex flex-col gap-2 items-end">
                       <Button
                         variant="outline"
                         size="icon"
-                          className="flex-1 sm:flex-none min-w-0 text-cyan-300 border-cyan-500 hover:bg-cyan-900"
+                        className="text-cyan-300 border-cyan-500 hover:bg-cyan-900"
                         onClick={() => navigate(`/quiz/${quiz.id}`)}
+                        aria-label="View Quiz"
                       >
                         <Eye className="h-4 w-4" />
                       </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                          className="flex-1 sm:flex-none min-w-0 text-cyan-300 border-cyan-500 hover:bg-cyan-900"
-                      onClick={() => navigate(`/edit-quiz/${quiz.id}`)}
-                    >
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                          className="flex-1 sm:flex-none min-w-0 text-red-300 border-red-500 hover:bg-red-900"
-                      onClick={() => handleDeleteQuiz(quiz.id)}
-                    >
-                      <Trash className="h-4 w-4" />
-                    </Button>
-                      </div>
-                  </CardFooter>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-cyan-300 border-cyan-500 hover:bg-cyan-900"
+                        onClick={() => navigate(`/edit-quiz/${quiz.id}`)}
+                        aria-label="Edit Quiz"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="text-red-300 border-red-500 hover:bg-red-900"
+                        onClick={() => handleDeleteQuiz(quiz.id)}
+                        aria-label="Delete Quiz"
+                      >
+                        <Trash className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </Card>
               ))
             )}

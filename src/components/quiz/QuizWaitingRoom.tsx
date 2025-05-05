@@ -284,7 +284,9 @@ export function QuizWaitingRoom() {
             100% { background-position: 200% 50%; }
           }
         `}</style>
-        <Navigation />
+        <div className="glass-nav w-full sticky top-0 z-30">
+          <Navigation />
+        </div>
         <div className="flex flex-col items-center justify-center flex-grow gap-4 w-full">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -312,7 +314,9 @@ export function QuizWaitingRoom() {
       <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-x-hidden font-sans">
         <div className="fixed inset-0 z-0 bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] animate-fade-in" aria-hidden="true" />
         <div className="fixed inset-0 z-0 pointer-events-none" style={{background: 'url(\"data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'0.5\' y=\'0.5\' width=\'39\' height=\'39\' rx=\'8.5\' fill=\'none\' stroke=\'%2367e8f933\'/%3E%3C/svg%3E\")', opacity: 0.12}} />
-        <Navigation />
+        <div className="glass-nav w-full sticky top-0 z-30">
+          <Navigation />
+        </div>
         <div className="flex flex-col items-center justify-center flex-grow gap-4 w-full">
           <div className="glass-card p-8 rounded-3xl shadow-2xl max-w-md w-full text-center">
             <div className="text-cyan-400 mb-4">
@@ -452,8 +456,9 @@ export function QuizWaitingRoom() {
           100% { background-position: 200% 50%; }
         }
       `}</style>
-      <div className="glass-nav w-full sticky top-0 z-30">
-      <Navigation />
+      {/* Responsive Navigation: Top on desktop, bottom on mobile */}
+      <div className="glass-nav w-full sticky top-0 z-30 hidden sm:block">
+        <Navigation />
       </div>
       <main className="flex-grow py-8 px-4 w-full flex flex-col items-center justify-center">
         <motion.div 
@@ -466,25 +471,25 @@ export function QuizWaitingRoom() {
           <div className="floating-code" onClick={handleCopyCode} title="Copy code to clipboard">
             <span>Code: {quizDetails.access_code}</span>
             {copied ? <CheckCircle className="h-5 w-5 text-green-300 animate-bounce" /> : <Copy className="h-5 w-5 text-cyan-100" />}
-                </div>
+          </div>
           {/* Card header */}
           <div className="w-full text-center mb-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             <span className="serif-heading text-lg font-bold text-cyan-200 drop-shadow animate-gradient-x waiting-anim">Waiting Room</span>
             <div className="w-full h-1 mt-3 rounded-full bg-cyan-900/60 overflow-hidden">
               <div className="h-1 rounded-full bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 shadow-cyan-glow transition-all duration-500" style={{width: `100%`}} />
             </div>
-                </div>
+          </div>
           {/* Quiz title */}
           <div className="w-full text-center mt-4 mb-6 md:mb-4 md:text-left">
             <p className="serif-heading text-2xl md:text-3xl font-black text-cyan-100 drop-shadow-xl animate-gradient-x mb-2" style={{textShadow: '0 2px 12px #0fffcf33'}}>{quizDetails.title}</p>
-                </div>
+          </div>
           {/* Quiz meta as stat chips */}
           <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
             <div className="stat-chip"><User className="h-5 w-5 text-cyan-400" /> <span>By <span className="font-bold">{quizDetails.professor?.username || quizDetails.creator_username || 'Unknown'}</span></span></div>
             <div className="stat-chip"><Timer className="h-5 w-5 text-cyan-400" /> <span>{quizDetails.question_count || 0} questions</span></div>
             <div className="stat-chip"><Clock className="h-5 w-5 text-cyan-400" /> <span>Waiting <span className="font-bold">{formatTime(waitingTime)}</span></span></div>
-              </div>
-              {quizDetails.description && (
+          </div>
+          {quizDetails.description && (
             <p className="text-cyan-300 mt-2 text-center">{quizDetails.description}</p>
           )}
           {/* Animated waiting message */}
@@ -498,37 +503,40 @@ export function QuizWaitingRoom() {
           </div>
           {/* Participants list */}
           <div className="w-full flex flex-wrap gap-3 justify-center md:justify-start mt-8">
-              {participants.length === 0 ? (
+            {participants.length === 0 ? (
               <div className="text-center p-8 w-full">
                 <Cake className="h-16 w-16 mx-auto text-cyan-300 mb-4" />
                 <p className="text-cyan-400 text-lg mb-2">No participants yet</p>
                 <p className="text-cyan-500 text-sm">
-                    Share the access code <span className="font-bold">{quizDetails.access_code}</span> with others to join
-                  </p>
-                </div>
-              ) : (
+                  Share the access code <span className="font-bold">{quizDetails.access_code}</span> with others to join
+                </p>
+              </div>
+            ) : (
               participants.map((participant, index) => (
-                    <motion.div
-                      key={participant.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                <motion.div
+                  key={participant.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.07, duration: 0.3 }}
                   className="pill-participant"
                 >
                   <span className="font-bold text-cyan-100">{participant.username || 'Unknown'}</span>
                   <span>{getRandomEmoji()}</span>
-                    </motion.div>
+                </motion.div>
               ))
             )}
-                  </div>
+          </div>
           {/* Live badge */}
           <div className="absolute top-4 left-4 bg-cyan-700/80 text-cyan-100 font-bold rounded-full px-4 py-1 shadow-cyan-glow flex items-center gap-2 animate-pulse">
             <Users className="h-4 w-4" /> {participants.length} Live
-              </div>
+          </div>
         </motion.div>
       </main>
+      <div className="block sm:hidden w-full fixed bottom-0 left-0 z-40">
+        <Navigation />
+      </div>
       <div className="glass-footer w-full mt-8">
-      <Footer />
+        <Footer />
       </div>
     </div>
   );
