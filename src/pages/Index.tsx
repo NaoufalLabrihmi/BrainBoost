@@ -341,8 +341,8 @@ const Index = () => {
                   {/* Animated mascot/character */}
                   <div className="mb-6 animate-bounce-slow">
                     <span className="inline-block rounded-full bg-gradient-to-br from-cyan-400 via-blue-400 to-teal-400 p-2 shadow-lg">
-                      {/* Placeholder for mascot - replace with Lottie/SVG as needed */}
-                      <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><ellipse cx="36" cy="36" rx="32" ry="28" fill="#22d3ee" opacity="0.7"/><ellipse cx="36" cy="36" rx="28" ry="24" fill="#fff" opacity="0.7"/><ellipse cx="36" cy="36" rx="20" ry="18" fill="#0ea5e9" opacity="0.8"/><ellipse cx="36" cy="36" rx="12" ry="10" fill="#fff" opacity="0.8"/></svg>
+                      {/* Brain Boost Logo (GraduationCap) */}
+                      <GraduationCap className="w-20 h-20 md:w-28 md:h-28 text-cyan-100 drop-shadow-cyan-glow" style={{ filter: 'drop-shadow(0 0 32px #22d3ee88)' }} />
                     </span>
                   </div>
                   <h1 className="text-6xl md:text-8xl font-extrabold mb-3 bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x drop-shadow-[0_4px_32px_rgba(34,211,238,0.25)] font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight animate-fadeIn">
