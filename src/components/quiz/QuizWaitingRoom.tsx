@@ -540,4 +540,4 @@ export function QuizWaitingRoom() {
       </div>
     </div>
   );
-} 
+}
