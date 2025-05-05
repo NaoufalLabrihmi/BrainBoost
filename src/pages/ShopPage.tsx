@@ -60,7 +60,7 @@ const ShopPage = () => {
 
   if (loading || productsLoading) {
     return (
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 text-white">
+      <div className="flex flex-col min-h-screen bg-gradient-to-r from-cyan-900/80 via-blue-900/80 to-purple-900/80 text-white">
         <Navigation />
         <main className="flex-grow flex items-center justify-center">
           <span className="text-lg font-semibold animate-pulse">Loading...</span>
@@ -72,13 +72,13 @@ const ShopPage = () => {
 
   if (productsError) {
     return (
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-cyan-900 via-blue-950 to-gray-900 text-white">
+      <div className="flex flex-col min-h-screen bg-gradient-to-r from-cyan-900/80 via-blue-900/80 to-purple-900/80 text-white">
         <Navigation />
         <main className="flex-grow flex items-center justify-center">
-          <div className="bg-cyan-900/80 border border-cyan-700 rounded-2xl shadow-2xl p-10 text-center max-w-md mx-auto">
+          <div className="bg-gradient-to-br from-cyan-900/80 via-blue-900/80 to-purple-900/80 border-2 border-cyan-400/30 rounded-2xl shadow-cyan-glow p-10 text-center max-w-md mx-auto backdrop-blur-2xl">
             <Gift className="mx-auto mb-4 h-10 w-10 text-cyan-300" />
-            <h2 className="text-2xl font-bold mb-4 text-cyan-200">Error Loading Products</h2>
-            <p className="text-white/80 text-base mb-2">{productsError}</p>
+            <h2 className="text-2xl font-bold mb-4 text-cyan-100">Error Loading Products</h2>
+            <p className="text-cyan-100/80 text-base mb-2">{productsError}</p>
           </div>
         </main>
         <Footer />
@@ -88,14 +88,14 @@ const ShopPage = () => {
 
   if (!profile || profile.role !== 'student') {
     return (
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-cyan-900 via-blue-950 to-gray-900 text-white">
+      <div className="flex flex-col min-h-screen bg-gradient-to-r from-cyan-900/80 via-blue-900/80 to-purple-900/80 text-white">
         <Navigation />
         <main className="flex-grow flex items-center justify-center">
-          <div className="bg-cyan-900/80 border border-cyan-700 rounded-2xl shadow-2xl p-10 text-center max-w-md mx-auto">
+          <div className="bg-gradient-to-br from-cyan-900/80 via-blue-900/80 to-purple-900/80 border-2 border-cyan-400/30 rounded-2xl shadow-cyan-glow p-10 text-center max-w-md mx-auto backdrop-blur-2xl">
             <Gift className="mx-auto mb-4 h-10 w-10 text-cyan-300" />
-            <h2 className="text-2xl font-bold mb-4 text-cyan-200">Shop Access Restricted</h2>
-            <p className="text-white/80 text-base mb-2">Only students can access the rewards shop.</p>
-            <p className="text-white/60 text-sm">If you are a student, please log in with your student account.</p>
+            <h2 className="text-2xl font-bold mb-4 text-cyan-100">Shop Access Restricted</h2>
+            <p className="text-cyan-100/80 text-base mb-2">Only students can access the rewards shop.</p>
+            <p className="text-cyan-100/60 text-sm">If you are a student, please log in with your student account.</p>
           </div>
         </main>
         <Footer />
@@ -223,7 +223,7 @@ const ShopPage = () => {
           `}</style>
         </svg>
       </div>
-      <div className="relative z-20 flex flex-col min-h-screen bg-transparent text-white">
+      <div className="relative z-20 flex flex-col min-h-screen bg-gradient-to-r from-cyan-900/80 via-blue-900/80 to-purple-900/80 text-white">
       <Navigation />
       <main className="flex-grow py-8">
         <div className="container mx-auto px-2 max-w-6xl">
@@ -231,9 +231,9 @@ const ShopPage = () => {
           <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-10 md:mb-14 gap-6 md:gap-4 w-full">
             {/* Left: Shop Title and Subtitle */}
             <div className="flex-1 flex flex-col items-center md:items-start justify-center w-full">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2 sm:mb-3 bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-200 bg-clip-text text-transparent relative tracking-tight text-center md:text-left w-full">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2 sm:mb-3 bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-200 bg-clip-text text-transparent relative tracking-tight text-center md:text-left w-full">
                 Rewards Shop
-                <span className="block h-1 w-24 sm:w-32 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 rounded-full mt-2 sm:mt-3 absolute left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 -bottom-3 sm:-bottom-4" />
+                <span className="block h-1 w-24 sm:w-32 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-300 rounded-full mt-2 sm:mt-3 absolute left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 -bottom-3 sm:-bottom-4" />
               </h1>
               <p className="text-cyan-100/90 text-lg sm:text-xl md:text-2xl font-medium mb-1 text-center md:text-left w-full">Redeem your points for exclusive rewards!</p>
             </div>
@@ -241,9 +241,9 @@ const ShopPage = () => {
             <div className="flex items-center gap-3 sm:gap-4 bg-cyan-900/60 rounded-3xl px-4 py-4 sm:px-8 sm:py-6 border-2 border-cyan-400/40 backdrop-blur-2xl relative overflow-hidden w-full max-w-xs md:max-w-none md:w-auto md:ml-6" style={{ boxShadow: 'none' }}>
               <div className="absolute -top-8 -right-8 w-20 h-20 bg-cyan-400/10 rounded-full blur-2xl" />
               {/* Avatar with gradient border */}
-              <div className="bg-gradient-to-br from-cyan-400 via-blue-500 to-cyan-900 p-0.5 sm:p-1 rounded-full">
-                <Avatar className="h-14 w-14 sm:h-20 sm:w-20 bg-gradient-to-br from-cyan-950 via-blue-950 to-gray-950 border-2 border-cyan-400">
-                  <AvatarFallback className="bg-gradient-to-tr from-cyan-700 via-blue-900 to-cyan-900 text-cyan-200 text-2xl sm:text-3xl font-extrabold flex items-center justify-center">
+              <div className="bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-500 p-0.5 sm:p-1 rounded-full">
+                <Avatar className="h-14 w-14 sm:h-20 sm:w-20 bg-gradient-to-br from-cyan-950 via-blue-950 to-purple-950 border-2 border-cyan-400">
+                  <AvatarFallback className="bg-gradient-to-tr from-cyan-700 via-blue-900 to-purple-900 text-cyan-200 text-2xl sm:text-3xl font-extrabold flex items-center justify-center">
                     {profile.username?.slice(0, 2).toUpperCase()}
                   </AvatarFallback>
               </Avatar>
@@ -251,7 +251,7 @@ const ShopPage = () => {
               <div className="flex flex-col items-end md:items-end">
                 <div className="text-lg sm:text-xl font-bold text-cyan-100 mb-1 tracking-wide text-right">{profile.username}</div>
                 <div className="flex items-baseline gap-1 sm:gap-2">
-                  <span className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-200 bg-clip-text text-transparent">{profile.points}</span>
+                  <span className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 bg-clip-text text-transparent">{profile.points}</span>
                   <span className="text-cyan-200 font-semibold text-sm sm:text-base">points</span>
                 </div>
               </div>
@@ -266,7 +266,7 @@ const ShopPage = () => {
                 return (
                 <Card
                   key={item.id}
-                    className="relative group overflow-hidden rounded-3xl w-[340px] h-[350px] mx-auto flex flex-col p-0 border-2 border-transparent bg-cyan-900/60 backdrop-blur-xl transition-transform duration-300 hover:scale-105 hover:border-[3px] hover:border-cyan-400/80"
+                    className="relative group overflow-hidden rounded-3xl w-[340px] h-[350px] mx-auto flex flex-col p-0 border-2 border-transparent bg-gradient-to-br from-cyan-900/80 via-blue-900/80 to-purple-900/80 backdrop-blur-xl transition-transform duration-300 hover:scale-105 hover:border-[3px] hover:border-cyan-400/80"
                     style={{ boxShadow: 'none', background: 'rgba(12, 24, 36, 0.65)' }}
                 >
                     {/* Image Area with Points Badge Overlay */}
@@ -308,7 +308,7 @@ const ShopPage = () => {
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button
-                              className="w-full text-base font-bold bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-400 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl py-3 transition-all duration-200"
+                              className="w-full text-base font-bold bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-400 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl py-3 transition-all duration-200"
                           variant={profile.points >= item.points_required ? 'default' : 'outline'}
                           disabled={profile.points < item.points_required}
                           onClick={() => setSelectedItem(item)}
@@ -317,7 +317,7 @@ const ShopPage = () => {
                           {profile.points >= item.points_required ? 'Redeem' : `Need ${item.points_required - profile.points} more points`}
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="bg-gradient-to-br from-cyan-900 via-blue-950 to-gray-900 border border-cyan-500/50 shadow-xl max-w-md w-full p-0 rounded-2xl overflow-hidden [&>button:first-child]:hidden">
+                      <DialogContent className="bg-gradient-to-br from-cyan-900 via-blue-950 to-purple-900 border border-cyan-500/50 shadow-xl max-w-md w-full p-0 rounded-2xl overflow-hidden [&>button:first-child]:hidden">
                         {/* Accessibility: Hidden DialogTitle and Description */}
                         <DialogTitle className="sr-only">Purchase Confirmation</DialogTitle>
                         <DialogDescription className="sr-only">
@@ -332,7 +332,7 @@ const ShopPage = () => {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-900/50 to-gray-900">
+                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-900/50 to-purple-900">
                               <ShoppingBag className="w-16 h-16 text-cyan-400/80" />
                             </div>
                           )}
@@ -438,17 +438,17 @@ const ShopPage = () => {
           )}
           {/* How to Earn More Points */}
           <div className="bg-cyan-900/70 p-8 rounded-3xl border-2 border-cyan-700/60 mt-16 backdrop-blur-2xl grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center gap-3 bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-gray-950/80 rounded-2xl p-6 border-2 border-cyan-700/40 backdrop-blur-xl hover:border-cyan-400/70 transition-all duration-300">
+            <div className="flex flex-col items-center text-center gap-3 bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-purple-950/80 rounded-2xl p-6 border-2 border-cyan-700/40 backdrop-blur-xl hover:border-cyan-400/70 transition-all duration-300">
               <Gift className="h-8 w-8 text-cyan-300 mb-2" />
               <h3 className="font-bold text-cyan-100 mb-1 text-lg tracking-tight">Participate in Quizzes</h3>
               <p className="text-cyan-200/90 text-sm font-medium">Join quizzes and score well to earn points. Top performers get bonus points!</p>
               </div>
-            <div className="flex flex-col items-center text-center gap-3 bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-gray-950/80 rounded-2xl p-6 border-2 border-cyan-700/40 backdrop-blur-xl hover:border-cyan-400/70 transition-all duration-300">
+            <div className="flex flex-col items-center text-center gap-3 bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-purple-950/80 rounded-2xl p-6 border-2 border-cyan-700/40 backdrop-blur-xl hover:border-cyan-400/70 transition-all duration-300">
               <Gift className="h-8 w-8 text-cyan-300 mb-2" />
               <h3 className="font-bold text-cyan-100 mb-1 text-lg tracking-tight">Help Others in the Forum</h3>
               <p className="text-cyan-200/90 text-sm font-medium">Answer questions in the forum. Get points when your answers are marked helpful.</p>
               </div>
-            <div className="flex flex-col items-center text-center gap-3 bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-gray-950/80 rounded-2xl p-6 border-2 border-cyan-700/40 backdrop-blur-xl hover:border-cyan-400/70 transition-all duration-300">
+            <div className="flex flex-col items-center text-center gap-3 bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-purple-950/80 rounded-2xl p-6 border-2 border-cyan-700/40 backdrop-blur-xl hover:border-cyan-400/70 transition-all duration-300">
               <Gift className="h-8 w-8 text-cyan-300 mb-2" />
               <h3 className="font-bold text-cyan-100 mb-1 text-lg tracking-tight">Daily Login Streaks</h3>
               <p className="text-cyan-200/90 text-sm font-medium">Login daily to maintain your streak. Longer streaks mean more bonus points!</p>

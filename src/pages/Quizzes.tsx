@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
-import { Eye, Edit, Trash, Copy, Search, Filter, ChevronDown, Check, Loader2, Archive, Rocket } from 'lucide-react';
+import { Eye, Edit, Trash, Copy, Search, Filter, ChevronDown, Check, Loader2, Archive, Rocket, Circle, CircleDot, CheckCircle } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface Quiz {
@@ -445,25 +445,31 @@ const Quizzes = () => {
                 </label>
               </div>
               {/* Status segmented control */}
-              <div className="flex items-center gap-2 bg-cyan-950/60 rounded-full px-2 py-1 border border-cyan-700/40 shadow-inner relative">
+              <div className="flex items-center gap-2 bg-cyan-950/60 rounded-full px-2 py-1 border border-cyan-700/40 shadow-inner relative overflow-x-auto scrollbar-none">
                 {['all', 'draft', 'published', 'archived'].map((status, idx) => {
                   const statusMap = {
-                    all: { label: 'All', color: 'bg-cyan-400' },
-                    draft: { label: 'Draft', color: 'bg-yellow-400' },
-                    published: { label: 'Published', color: 'bg-green-400' },
-                    archived: { label: 'Archived', color: 'bg-gray-400' },
+                    all: { label: 'All', color: 'text-cyan-400', icon: <Circle className="w-5 h-5" fill="#22d3ee" /> },
+                    draft: { label: 'Draft', color: 'text-yellow-400', icon: <CircleDot className="w-5 h-5" /> },
+                    published: { label: 'Published', color: 'text-green-400', icon: <CheckCircle className="w-5 h-5" /> },
+                    archived: { label: 'Archived', color: 'text-gray-400', icon: <Archive className="w-5 h-5" /> },
                   };
                   const active = statusFilter === status;
                   return (
                     <button
                       key={status}
                       onClick={() => setStatusFilter(status)}
-                      className={`flex items-center gap-1 px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 relative z-10
-                        ${active ? 'text-cyan-100' : 'text-cyan-400 hover:text-cyan-200'} focus:outline-none focus:ring-2 focus:ring-cyan-400/40`}
-                      style={{ minWidth: 80 }}
+                      className={`flex items-center justify-center sm:gap-1 px-2 sm:px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 relative z-10
+                        ${active ? 'text-cyan-100' : statusMap[status].color + ' hover:text-cyan-200'} focus:outline-none focus:ring-2 focus:ring-cyan-400/40`}
+                      style={{ minWidth: 40, minHeight: 40 }}
+                      aria-label={statusMap[status].label}
+                      title={statusMap[status].label}
                     >
-                      <span className={`inline-block w-2 h-2 rounded-full mr-1 ${statusMap[status].color}`}></span>
-                      {statusMap[status].label}
+                      {/* Icon only on mobile, icon+label on sm+ */}
+                      <span className="block sm:hidden">{statusMap[status].icon}</span>
+                      <span className="hidden sm:flex items-center">
+                        {statusMap[status].icon}
+                        <span className="ml-1">{statusMap[status].label}</span>
+                      </span>
                       {active && (
                         <span className="absolute inset-0 rounded-full bg-cyan-400/10 border border-cyan-400/30 shadow-lg -z-10 animate-fade-in"></span>
                       )}
@@ -568,41 +574,47 @@ const Quizzes = () => {
                       </div>
                     </div>
                   </CardContent>
-                    <CardFooter className="flex justify-end items-center space-x-2">
-                      <StatusActionPill
-                        status={quiz.status}
-                        loading={!!statusLoading[quiz.id]}
-                        onAction={() => {
-                          if (quiz.status === 'draft' || quiz.status === 'archived') handleChangeQuizStatus(quiz.id, 'published');
-                          else if (quiz.status === 'published') handleChangeQuizStatus(quiz.id, 'archived');
-                        }}
-                      />
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="text-cyan-300 border-cyan-500 hover:bg-cyan-900"
-                        onClick={() => navigate(`/quiz/${quiz.id}`)}
-                      >
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                        className="text-cyan-300 border-cyan-500 hover:bg-cyan-900"
-                      onClick={() => navigate(`/edit-quiz/${quiz.id}`)}
+                    <CardFooter
+                      className="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-2 sm:gap-2 items-stretch justify-stretch pt-4"
                     >
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="text-red-300 border-red-500 hover:bg-red-900"
-                      onClick={() => handleDeleteQuiz(quiz.id)}
-                    >
-                      <Trash className="h-4 w-4" />
-                    </Button>
-                  </CardFooter>
-                </Card>
+                      <div className="w-full sm:w-auto">
+                        <StatusActionPill
+                          status={quiz.status}
+                          loading={!!statusLoading[quiz.id]}
+                          onAction={() => {
+                            if (quiz.status === 'draft' || quiz.status === 'archived') handleChangeQuizStatus(quiz.id, 'published');
+                            else if (quiz.status === 'published') handleChangeQuizStatus(quiz.id, 'archived');
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-row gap-2 w-full sm:w-auto justify-end">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="flex-1 sm:flex-none min-w-0 text-cyan-300 border-cyan-500 hover:bg-cyan-900"
+                          onClick={() => navigate(`/quiz/${quiz.id}`)}
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="flex-1 sm:flex-none min-w-0 text-cyan-300 border-cyan-500 hover:bg-cyan-900"
+                          onClick={() => navigate(`/edit-quiz/${quiz.id}`)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="flex-1 sm:flex-none min-w-0 text-red-300 border-red-500 hover:bg-red-900"
+                          onClick={() => handleDeleteQuiz(quiz.id)}
+                        >
+                          <Trash className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
               ))
             )}
           </div>

@@ -171,7 +171,7 @@ const ForumPage = () => {
             <section className="flex-1 min-w-0">
               <h2 className="text-lg sm:text-xl font-bold text-cyan-200 mb-4 sm:mb-6">Browse Questions</h2>
           <Tabs value={tab} onValueChange={value => setTab(value as 'recent' | 'popular' | 'unanswered')} className="mb-8">
-                <TabsList className="bg-cyan-950/60 border-0 rounded-full flex gap-2 px-2 py-1 mb-4 sm:mb-6">
+                <TabsList className="bg-cyan-950/80 border-0 rounded-full flex gap-2 px-2 py-1 mb-4 sm:mb-6 sticky top-20 z-30 backdrop-blur-xl shadow-none">
                   <TabsTrigger value="recent">Recent</TabsTrigger>
                   <TabsTrigger value="popular">Popular</TabsTrigger>
               <TabsTrigger value="unanswered">Unanswered</TabsTrigger>
@@ -514,66 +514,52 @@ const ForumPostCard = ({ post, formatDate, setDeleteConfirmId, deleting, setEdit
 
   const isUnanswered = !post.comments || post.comments.length === 0;
   return (
-    <Card className="w-full overflow-hidden card-hover bg-white/5 border border-cyan-900/20 text-white relative rounded-2xl transition-transform duration-200 hover:scale-[1.015] cursor-pointer group px-2 py-2 sm:px-4 sm:py-4">
-      <CardHeader className="pb-2 relative">
-        <div className="flex flex-wrap items-start justify-between gap-2 sm:gap-4 min-w-0">
-          <div className="flex items-center gap-2 min-w-0">
-            <Avatar className="h-10 w-10 border-2 shadow-lg shadow-cyan-500/20 flex-shrink-0">
-              <AvatarImage src={post.author?.avatar_url || ''} />
-              <AvatarFallback className={`${getAvatarGradient(post.author?.role)} text-white font-extrabold text-lg flex items-center justify-center`} style={{ letterSpacing: '-1px', textShadow: '0 2px 8px #0008' }}>
-                {getUserInitialsFromObj(post.author)}
-              </AvatarFallback>
-            </Avatar>
-            <div className="min-w-0">
-              <span className="text-base font-bold truncate block max-w-[120px] sm:max-w-[180px]">{post.author?.username || 'Unknown'}</span>
-              <div className="text-xs text-cyan-200 capitalize truncate">{post.author?.role || 'student'}</div>
-            </div>
+    <Card
+      className="w-full overflow-hidden bg-gradient-to-br from-cyan-950/80 via-blue-950/80 to-gray-950/90 border-2 border-cyan-800/60 text-white relative rounded-3xl transition-transform duration-200 hover:border-cyan-400/80 focus-within:border-cyan-400/80 cursor-pointer group px-0 py-0 shadow-none backdrop-blur-xl"
+      style={{ background: 'rgba(12, 24, 36, 0.75)' }}
+    >
+      <CardHeader className="pb-2 pt-5 px-6 relative flex flex-row items-start justify-between gap-3">
+        {/* Author */}
+        <div className="flex items-center gap-4 min-w-0">
+          <Avatar className="h-11 w-11 border-2 border-cyan-400 bg-cyan-950 flex-shrink-0">
+            <AvatarImage src={post.author?.avatar_url || ''} />
+            <AvatarFallback className={`${getAvatarGradient(post.author?.role)} text-white font-extrabold text-lg flex items-center justify-center`} style={{ letterSpacing: '-1px', textShadow: '0 2px 8px #0008' }}>
+              {getUserInitialsFromObj(post.author)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="min-w-0 flex flex-col gap-0.5">
+            <span className="text-base font-extrabold truncate block max-w-[120px] sm:max-w-[180px] text-cyan-100/90">{post.author?.username || 'Unknown'}</span>
+            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-cyan-800/40 border border-cyan-700/30 text-cyan-200 capitalize truncate w-fit">{post.author?.role || 'student'}</span>
           </div>
-          <div className="flex flex-wrap items-center gap-1 sm:gap-2 min-w-0">
+        </div>
+        {/* Top right: tags and 3-dots menu in same line */}
+        <div className="flex items-center gap-2 min-w-[40px]">
+          {/* Tags/Badges */}
+          <div className="flex flex-wrap gap-1 justify-end">
             {solved ? (
-              <Badge className="bg-green-600/90 text-white border-green-300 flex items-center px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full">
-                <Check className="h-3 w-3 mr-1" />
-                Solved
-              </Badge>
+              <span className="px-3 py-1 rounded-full bg-green-600/90 text-white text-xs font-bold tracking-wide border border-green-300/40">Solved</span>
             ) : (
-              <Badge className="bg-yellow-500/90 text-white border-yellow-200 flex items-center px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full">
-                Unsolved
-              </Badge>
+              <span className="px-3 py-1 rounded-full bg-yellow-500/90 text-white text-xs font-bold tracking-wide border border-yellow-200/40">Unsolved</span>
             )}
             {isUnanswered && (
-              <Badge className="bg-red-600/90 text-white border-red-200 flex items-center px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full animate-pulse">
-                Unanswered
-              </Badge>
+              <span className="px-3 py-1 rounded-full bg-red-700/90 text-white text-xs font-bold tracking-wide border border-red-300/40 animate-pulse">Unanswered</span>
             )}
-            <Badge variant="outline" className="capitalize bg-cyan-900/40 text-cyan-100 border border-cyan-700/30 px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full break-words whitespace-normal order-2 sm:order-none">
+            <span className="capitalize px-3 py-1 rounded-full bg-cyan-900/60 text-cyan-100 border border-cyan-700/30 text-xs font-bold tracking-wide">
               {post.category?.name || 'General'}
-            </Badge>
-            {user && post.author?.id === user.id && (
-              <button
-                className="ml-1 px-2 py-0.5 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-semibold shadow transition-all border border-cyan-400"
-                onClick={async (e) => {
-                  e.stopPropagation();
-                  await markPostSolved(post.id, !solved);
-                  setSolved(!solved);
-                }}
-                type="button"
-              >
-                Mark as {solved ? 'Unsolved' : 'Solved'}
-              </button>
-            )}
+            </span>
           </div>
-          {/* 3-dots menu for author only - always top-right on mobile, inline on desktop */}
+          {/* 3-dots menu last in row */}
           {user && post.author?.id === user.id && (
-            <div className="absolute right-2 top-2 sm:static sm:ml-1">
+            <div className="relative">
               <button
-                className="p-2 rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                className="p-2 rounded-full hover:bg-cyan-900/60 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
                 onClick={(e) => { e.stopPropagation(); setShowMenu((v) => !v); }}
                 aria-label="More options"
               >
-                <MoreVertical className="h-5 w-5 text-gray-400" />
+                <MoreVertical className="h-5 w-5 text-cyan-300" />
               </button>
               {showMenu && (
-                <div className="absolute right-0 mt-2 w-32 bg-gray-900 border border-cyan-700 rounded-lg shadow-lg z-20 animate-fade-in-up">
+                <div className="absolute right-0 mt-2 w-32 bg-gray-900 border border-cyan-700 rounded-lg z-20 animate-fade-in-up">
                   <button
                     className="w-full text-left px-4 py-2 hover:bg-cyan-600 hover:text-white rounded-t-lg transition"
                     onClick={() => { setShowMenu(false); setEditModal({ id: post.id, title: post.title, description: post.content, category: post.category?.id, solved }); }}
@@ -593,40 +579,38 @@ const ForumPostCard = ({ post, formatDate, setDeleteConfirmId, deleting, setEdit
           )}
         </div>
       </CardHeader>
-      <CardContent className="pb-4">
+      <CardContent className="pt-0 pb-3 px-6">
         <Link to={`/forum/${post.id}`} className="block group focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-xl min-w-0">
-          <h3 className="font-semibold text-base sm:text-lg hover:text-cyan-400 dark:hover:text-blue-400 transition-colors mb-2 group-hover:underline break-words truncate max-w-full">
+          <h3 className="font-extrabold text-2xl sm:text-3xl mb-2 break-words truncate max-w-full text-white group-hover:bg-gradient-to-r group-hover:from-cyan-200 group-hover:via-blue-300 group-hover:to-teal-200 group-hover:bg-clip-text group-hover:text-transparent transition-all">
             {post.title}
           </h3>
-          <p className="text-cyan-100/80 text-sm line-clamp-2 break-words">
+          <p className="text-cyan-50 text-lg sm:text-xl font-semibold leading-relaxed line-clamp-2 break-words mb-1" style={{ WebkitLineClamp: 2, display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', maxHeight: '2.8em' }}>
             {post.content}
           </p>
         </Link>
       </CardContent>
-      <CardFooter className="border-t bg-cyan-950/40 py-3 flex flex-row-reverse sm:flex-row items-end sm:items-center justify-between text-sm gap-2 sm:gap-0">
-        <span className="text-cyan-200 font-medium flex items-center gap-1 w-full sm:w-auto justify-end">
-          <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 mr-1"></span>
-          {formatDate(post.created_at)}
-        </span>
-        <div className="flex items-center gap-4 w-full sm:w-auto">
+      {/* Like & replies bottom left, date bottom right */}
+      <CardFooter className="border-t-0 bg-transparent pt-0 pb-5 px-6 flex items-end justify-between gap-2">
+        <div className="flex items-center gap-4">
           <button
-            className={`flex items-center gap-1 group px-2 py-1 rounded-full transition-all duration-150 border border-transparent hover:border-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-400 ${likes.some((like: any) => like.user_id === user.id) ? 'text-cyan-400 bg-cyan-900/30' : 'text-gray-400 hover:bg-gray-700/40'} ${isLiking ? 'opacity-50 pointer-events-none' : ''}`}
+            className={`flex items-center gap-1 group px-3 py-1.5 rounded-full transition-all duration-150 border border-cyan-700/30 hover:border-cyan-400 focus-visible:ring-2 focus-visible:ring-cyan-400 ${likes.some((like: any) => like.user_id === user?.id) ? 'text-cyan-300 bg-cyan-900/60' : 'text-cyan-200 hover:bg-cyan-900/30'} ${isLiking ? 'opacity-50 pointer-events-none' : ''}`}
             onClick={handleLike}
             disabled={isLiking || !user}
-            aria-label={likes.some((like: any) => like.user_id === user.id) ? 'Unlike' : 'Like'}
-            title={likes.some((like: any) => like.user_id === user.id) ? 'Unlike' : 'Like'}
+            aria-label={likes.some((like: any) => like.user_id === user?.id) ? 'Unlike' : 'Like'}
+            title={likes.some((like: any) => like.user_id === user?.id) ? 'Unlike' : 'Like'}
             type="button"
           >
-            <Heart className={`h-5 w-5 transition-colors ${likes.some((like: any) => like.user_id === user.id) ? 'fill-cyan-400' : 'fill-none'} group-hover:scale-110`} />
-            <span className="font-semibold text-base ml-1">{likes.length}</span>
+            <Heart className={`h-5 w-5 transition-colors ${likes.some((like: any) => like.user_id === user?.id) ? 'fill-cyan-300' : 'fill-none'} group-hover:scale-110`} />
+            <span className="font-bold text-base ml-1">{likes.length}</span>
           </button>
-          <span className="h-5 w-px bg-cyan-700 mx-2 rounded-full hidden sm:inline-block" />
-          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-cyan-900/30">
+          <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-cyan-900/30 border border-cyan-700/30">
             <MessageCircle className="h-4 w-4 text-cyan-200" />
-            <span className="font-semibold text-base ml-1 text-cyan-100">{post.comments?.length || 0}</span>
+            <span className="font-bold text-base ml-1 text-cyan-100">{post.comments?.length || 0}</span>
             <span className="text-xs text-cyan-200 ml-1">{post.comments?.length === 1 ? 'reply' : 'replies'}</span>
           </div>
         </div>
+        {/* Date bottom right */}
+        <span className="text-xs text-cyan-200/80 font-mono select-none mb-0.5">{formatDate(post.created_at)}</span>
       </CardFooter>
     </Card>
   );

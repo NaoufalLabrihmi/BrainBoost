@@ -223,12 +223,13 @@ export function JoinQuizDialog({ isOpen, onClose }: JoinQuizDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md bg-gradient-to-br from-[#101624]/90 via-[#162032]/90 to-[#1a2636]/90 border-0 shadow-2xl rounded-3xl ring-2 ring-cyan-700/30">
+      <DialogContent className="sm:max-w-md bg-gradient-to-br from-cyan-900/90 via-blue-900/90 to-teal-900/90 border-2 border-cyan-500/40 rounded-3xl p-0">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Join Quiz</DialogTitle>
+          <DialogTitle className="text-2xl font-extrabold bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-clip-text text-transparent font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight text-center">Join Quiz</DialogTitle>
         </DialogHeader>
+        <div className="h-1 w-full bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 animate-gradient-x rounded-b-xl mb-4" />
         <DialogDescription className="sr-only">Enter a quiz code to join a quiz session. You will see quiz details if the code is valid.</DialogDescription>
-        <div className="space-y-4">
+        <div className="space-y-4 px-6 pb-6">
           <div className="space-y-2">
             <Input
               type="text"
@@ -236,53 +237,42 @@ export function JoinQuizDialog({ isOpen, onClose }: JoinQuizDialogProps) {
               value={quizCode}
               onChange={(e) => setQuizCode(e.target.value.toUpperCase())}
               maxLength={6}
-              className="bg-gray-900 border-cyan-700 text-cyan-100 placeholder-cyan-400 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all h-12 text-lg text-center tracking-widest"
+              className="bg-cyan-950/80 border-cyan-700 text-cyan-100 placeholder-cyan-400 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all h-12 text-lg text-center tracking-widest font-['Inter',_Poppins,_sans-serif] rounded-xl"
             />
           </div>
-
           {isLoading && (
             <div className="flex justify-center">
-              <Loader2 className="h-6 w-6 animate-spin" />
+              <Loader2 className="h-6 w-6 animate-spin text-cyan-300" />
             </div>
           )}
-
           {quizDetails && !isLoading && quizDetails.status !== 'archived' && quizDetails.status === 'published' && (
-            <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
-              <h3 className="font-semibold">{quizDetails.title}</h3>
-              <p className="text-sm text-gray-600">
-                Created by: {quizDetails.professor?.username || quizDetails.creator_username || 'Unknown'}
-              </p>
-              <p className="text-sm text-gray-600">
-                Questions: {quizDetails.question_count || 0}
-              </p>
+            <div className="space-y-2 p-4 bg-cyan-900/60 border border-cyan-700/40 rounded-2xl">
+              <h3 className="font-bold text-cyan-100 text-lg font-['Orbitron',_Montserrat,_Poppins,_sans-serif]">{quizDetails.title}</h3>
+              <p className="text-sm text-cyan-200 font-semibold">Created by: {quizDetails.professor?.username || quizDetails.creator_username || 'Unknown'}</p>
+              <p className="text-sm text-cyan-200 font-semibold">Questions: {quizDetails.question_count || 0}</p>
               <Button
                 onClick={handleJoinQuiz}
-                className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-400 text-white font-bold shadow-cyan-glow hover:scale-[1.03] transition-all text-lg py-3"
+                className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-teal-400 text-white font-bold shadow-cyan-glow hover:scale-105 transition-all text-lg py-3 rounded-xl"
                 disabled={isLoading}
               >
                 {isLoading ? 'Joining...' : 'Join Quiz'}
               </Button>
             </div>
           )}
-
           {quizDetails && quizDetails.status === 'archived' && !isLoading && (
-            <div className="text-center text-red-500 font-semibold p-4">
-              This quiz is archived and cannot be joined.
-            </div>
+            <div className="text-center text-red-400 font-semibold p-4 bg-cyan-900/60 border border-cyan-700/40 rounded-2xl">This quiz is archived and cannot be joined.</div>
           )}
-
           {quizDetails && quizDetails.status !== 'published' && quizDetails.status !== 'archived' && !isLoading && (
-            <div className="text-center text-yellow-500 font-semibold p-4">
-              This quiz is not available to join. Only published quizzes can be joined.
-            </div>
+            <div className="text-center text-yellow-300 font-semibold p-4 bg-cyan-900/60 border border-cyan-700/40 rounded-2xl">This quiz is not available to join. Only published quizzes can be joined.</div>
           )}
-
           {!quizDetails && quizCode.length === 6 && !isLoading && (
-            <div className="text-center text-gray-500">
-              No quiz found with this code
-            </div>
+            <div className="text-center text-cyan-400 font-semibold p-4">No quiz found with this code</div>
           )}
         </div>
+        <style>{`
+          @keyframes gradient-x { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+          .animate-gradient-x { background-size: 200% 200%; animation: gradient-x 6s ease-in-out infinite; }
+        `}</style>
       </DialogContent>
     </Dialog>
   );

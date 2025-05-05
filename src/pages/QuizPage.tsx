@@ -49,22 +49,23 @@ function QuestionAccordion({ question, index }: { question: Question, index: num
   return (
     <div className="mb-4">
       <button
-        className="w-full flex justify-between items-center px-6 py-4 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 border border-cyan-800/60 rounded-2xl shadow-xl hover:scale-[1.01] hover:shadow-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 py-4 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 border border-cyan-800/60 rounded-2xl shadow-xl hover:scale-[1.01] hover:shadow-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={`question-content-${question.id}`}
       >
-        <span className="flex items-center text-xl font-bold text-white">
-          Question {index + 1}: <span className="ml-2 text-cyan-200 font-normal">{question.question_text}</span>
-        </span>
-        <span className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row w-full sm:items-center">
+          <span className="text-base sm:text-xl font-bold text-white whitespace-nowrap">Question {index + 1}:</span>
+          <span className="ml-0 sm:ml-2 text-cyan-200 font-normal break-words line-clamp-2 text-base sm:text-lg w-full text-left">{question.question_text}</span>
+        </div>
+        <div className="flex flex-row flex-wrap gap-2 mt-3 sm:mt-0 sm:ml-4 items-center">
           <Badge className="bg-cyan-500/10 text-cyan-300">
             {question.points * (question.point_multiplier || 1)} {question.points * (question.point_multiplier || 1) === 1 ? 'point' : 'points'}
             {question.point_multiplier > 1 ? ` (${question.point_multiplier}x)` : ''}
           </Badge>
           <Badge className="bg-blue-500/10 text-blue-300">{question.time_limit}s</Badge>
           <ChevronDown className={`ml-2 h-5 w-5 text-cyan-300 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
-        </span>
+        </div>
       </button>
       <div
         id={`question-content-${question.id}`}
@@ -455,29 +456,29 @@ const QuizPage = () => {
           <div className="w-full mb-8">
             <div className="bg-gradient-to-br from-cyan-900/80 to-blue-900/80 shadow-2xl rounded-2xl p-6 border border-cyan-700/60 animate-fade-in flex flex-col items-center justify-center backdrop-blur-md bg-opacity-80 ring-1 ring-cyan-400/10">
               <div className="flex flex-col items-center gap-3 w-full">
-                <div className="flex items-center gap-3 w-full justify-center">
+                <div className="flex items-center gap-3 w-full justify-center flex-wrap">
                   <Rocket className="h-7 w-7 text-cyan-400 animate-float" />
-                  <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-lg text-center">
-              {quiz.title}
-            </h1>
-                  <Badge className={getStatusColor(quiz.status) + ' text-base px-4 py-1.5 rounded-full shadow-lg animate-fade-in ml-4'}>
-                {quiz.status.charAt(0).toUpperCase() + quiz.status.slice(1)}
-              </Badge>
+                  <h1 className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-transparent bg-clip-text drop-shadow-lg text-center break-words max-w-full line-clamp-2">
+                    {quiz.title}
+                  </h1>
+                  <Badge className={getStatusColor(quiz.status) + ' text-base px-4 py-1.5 rounded-full shadow-lg animate-fade-in ml-0 sm:ml-4'}>
+                    {quiz.status.charAt(0).toUpperCase() + quiz.status.slice(1)}
+                  </Badge>
                 </div>
                 <div className="w-full border-t border-cyan-700/40 my-3"></div>
-                <div className="flex flex-col items-center">
-                  <span className="uppercase text-cyan-300 tracking-widest text-base font-semibold mb-1">Access Code</span>
-                  <div className="flex items-center bg-cyan-900/60 px-6 py-3 rounded-xl shadow-lg border border-cyan-700 transition-transform duration-200 hover:scale-105 hover:shadow-2xl">
-                    <span className="font-mono text-2xl sm:text-3xl text-white tracking-widest select-all mr-3">{quiz.access_code}</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                      className="h-9 w-9 text-cyan-400 hover:text-white"
-                  onClick={() => handleCopyCode(quiz.access_code)}
+                <div className="flex flex-col items-center w-full">
+                  <span className="uppercase text-cyan-300 tracking-widest text-sm sm:text-base font-semibold mb-1">Access Code</span>
+                  <div className="flex flex-col sm:flex-row items-center justify-center bg-cyan-900/60 px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-lg border border-cyan-700 transition-transform duration-200 hover:scale-105 hover:shadow-2xl w-full max-w-full mx-auto">
+                    <span className="font-mono text-lg sm:text-3xl text-white tracking-widest select-all mr-0 sm:mr-3 break-all line-clamp-1 text-center w-full sm:w-auto">{quiz.access_code}</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 sm:h-9 sm:w-9 text-cyan-400 hover:text-white mt-2 sm:mt-0"
+                      onClick={() => handleCopyCode(quiz.access_code)}
                       aria-label="Copy access code"
-                >
-                      <Copy className="h-6 w-6" />
-                </Button>
+                    >
+                      <Copy className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </Button>
                   </div>
                 </div>
               </div>
