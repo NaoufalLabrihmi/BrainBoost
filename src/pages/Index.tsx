@@ -345,15 +345,24 @@ const Index = () => {
                 </div>
                 {/* Centered text block */}
                 <div className="container mx-auto px-4 relative z-10 text-center flex-1 flex flex-col items-center justify-center">
-                  <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-cyan-300 via-blue-400 to-teal-300 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x drop-shadow-[0_4px_32px_rgba(34,211,238,0.25)] font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight animate-fadeIn max-w-md mx-auto break-words">
+                  <h1
+                    className="text-5xl md:text-7xl font-extrabold mb-4 bg-gradient-to-r from-yellow-300 via-cyan-400 to-blue-500 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x drop-shadow-[0_6px_32px_rgba(34,211,238,0.45)] font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight"
+                    style={{ textShadow: '0 4px 32px #22d3ee88, 0 2px 8px #0ea5e9cc' }}
+                  >
                     Compete. <span className="text-white/90">Learn.</span> <span className="text-cyan-200">Win.</span>
                   </h1>
-                  <p className="text-3xl md:text-4xl font-black mb-3 bg-gradient-to-r from-cyan-200 via-blue-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-cyan-glow animate-slideUp font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight">
-                    Welcome to Brain Boost!
+                  <p
+                    className="text-3xl md:text-4xl font-black mb-4 text-cyan-100 drop-shadow-cyan-glow animate-fadeIn font-['Orbitron',_Montserrat,_Poppins,_sans-serif] tracking-tight"
+                    style={{ textShadow: '0 2px 16px #0ea5e9cc' }}
+                  >
+                    Welcome to <span className="text-yellow-300">Brain Boost!</span>
                   </p>
-                  <p className="text-xl md:text-2xl font-semibold max-w-3xl mx-auto mb-8 animate-fadeIn font-['Inter',_Poppins,_sans-serif] text-cyan-100/95 drop-shadow-lg">
-                    Turn learning into a game. Join quizzes, earn points, climb the leaderboard, and win real rewards. Compete with friends and classmates in a vibrant, fun community!
-                  </p>
+                  <div className="backdrop-blur-md bg-cyan-900/40 rounded-2xl px-6 py-4 max-w-2xl mx-auto mb-8 shadow-cyan-glow animate-fadeIn">
+                    <p className="text-xl md:text-2xl font-semibold text-cyan-100/95 drop-shadow-lg font-['Inter',_Poppins,_sans-serif]">
+                      Turn learning into a <span className="text-yellow-300 font-bold">game</span>. Join quizzes, earn points, climb the leaderboard, and win real rewards.<br />
+                      <span className="text-cyan-200">Compete with friends and classmates in a vibrant, fun community!</span>
+                    </p>
+                  </div>
                   <div className="flex flex-col md:flex-row justify-center gap-4 max-w-md mx-auto animate-fadeIn mt-2">
                     {!user && (
                       <>
@@ -361,10 +370,13 @@ const Index = () => {
                           <DialogTrigger asChild>
                             <Button 
                               size="lg" 
-                              className="bg-cyan-500 text-white font-bold text-lg px-8 py-3 rounded-full shadow-cyan-glow hover:bg-cyan-600 hover:scale-105 transition-transform flex items-center gap-2"
+                              className="bg-cyan-500 text-white font-bold text-lg px-8 py-3 rounded-full shadow-cyan-glow flex items-center gap-3 relative overflow-visible group transition-all duration-300 hover:bg-gradient-to-r hover:from-yellow-400 hover:via-cyan-400 hover:to-blue-500 hover:text-white hover:scale-105 hover:-translate-y-1 focus:ring-2 focus:ring-cyan-400/40"
                             >
-                              <Star className="w-6 h-6 mr-1 animate-bounce" />
-                              Join the Competition
+                              <span className="relative flex items-center justify-center mr-2">
+                                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-300 via-cyan-400 to-blue-400 blur-md opacity-60 group-hover:opacity-80 animate-pulse"></span>
+                                <Star className="w-8 h-8 z-10 text-yellow-300 drop-shadow-cyan-glow animate-bounce" />
+                              </span>
+                              <span className="z-10">Join the Competition</span>
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="bg-transparent border-0 max-w-full p-0 flex items-center justify-center">
@@ -381,9 +393,13 @@ const Index = () => {
                             <Button 
                               size="lg" 
                               variant="outline" 
-                              className="border-cyan-400 text-cyan-200 hover:bg-cyan-900/30 hover:text-white text-lg px-8 py-3 rounded-full shadow-cyan-glow"
+                              className="border-cyan-400 text-cyan-200 bg-transparent text-lg px-8 py-3 rounded-full shadow-cyan-glow flex items-center gap-3 relative overflow-visible group transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:via-cyan-400 hover:to-blue-500 hover:text-white hover:scale-105 hover:-translate-y-1 focus:ring-2 focus:ring-cyan-400/40"
                             >
-                              Log in
+                              <span className="relative flex items-center justify-center mr-2">
+                                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 via-blue-400 to-purple-400 blur-md opacity-60 group-hover:opacity-80 animate-pulse"></span>
+                                <User className="w-8 h-8 z-10 text-cyan-300 drop-shadow-cyan-glow animate-bounce" />
+                              </span>
+                              <span className="z-10">Log in</span>
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="bg-transparent border-0 max-w-full p-0 flex items-center justify-center">
