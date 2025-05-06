@@ -206,15 +206,15 @@ export default function QuizResults() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] text-white">
+      <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] text-white">
         <Navigation />
         {/* Animated background gradient shapes */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-cyan-700/30 to-blue-900/0 rounded-full blur-3xl animate-fade-in" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-gradient-to-tr from-blue-800/30 to-cyan-900/0 rounded-full blur-3xl animate-fade-in-slow" />
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-x-hidden">
+          <div className="absolute top-0 left-0 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-gradient-to-br from-cyan-700/30 to-blue-900/0 rounded-full blur-3xl animate-fade-in" />
+          <div className="absolute bottom-0 right-0 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-gradient-to-tr from-blue-800/30 to-cyan-900/0 rounded-full blur-3xl animate-fade-in-slow" />
         </div>
         <main className="flex-grow py-8 relative z-10">
-          <div className="container px-4 mx-auto">
+          <div className="w-full max-w-7xl px-4 mx-auto">
             <div className="flex items-center mb-8">
               <Button 
                 variant="ghost" 
@@ -238,7 +238,7 @@ export default function QuizResults() {
 
   if (!quiz) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] text-white">
+      <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] text-white">
         <Navigation />
         <main className="flex-grow flex flex-col items-center justify-center">
           <div className="text-center">
@@ -252,15 +252,15 @@ export default function QuizResults() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] text-white">
+    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-br from-[#0a1626] via-[#101624] to-[#232b3b] text-white">
       <Navigation />
       {/* Animated background gradient shapes */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-gradient-to-br from-cyan-700/30 to-blue-900/0 rounded-full blur-3xl animate-fade-in" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-gradient-to-tr from-blue-800/30 to-cyan-900/0 rounded-full blur-3xl animate-fade-in-slow" />
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-x-hidden">
+        <div className="absolute top-0 left-0 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-gradient-to-br from-cyan-700/30 to-blue-900/0 rounded-full blur-3xl animate-fade-in" />
+        <div className="absolute bottom-0 right-0 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-gradient-to-tr from-blue-800/30 to-cyan-900/0 rounded-full blur-3xl animate-fade-in-slow" />
       </div>
       <main className="flex-grow py-8 relative z-10">
-        <div className="container px-4 mx-auto">
+        <div className="w-full max-w-7xl px-4 mx-auto">
           <div className="flex items-center mb-8">
             <Button 
               variant="ghost" 
