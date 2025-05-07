@@ -31,8 +31,8 @@ Brain Boost is the ultimate learning competition platform. Students and teachers
 
 ### 1. **Clone the Repository**
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+git clone (https://github.com/NaoufalLabrihmi/BrainBoost.git)
+cd BrainBoost
 ```
 
 ### 2. **Install Dependencies**
